@@ -1,0 +1,868 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Mike Persona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one working column (max 1080px) under a brand-gradient top bar; Home opens with a gradient hero, later steps carry a summary strip. */
+:root {
+  --bg: #F5F8FB; --surface: #FFFFFF; --surface-2: #F5F8FB; --raised: #FFFFFF;
+  --border: #DCE5EF; --text: #1A2433; --muted: #5B6B80; --heading: #0A1E3C;
+  --blue: #0096D6; --blue-deep: #0063A6; --navy: #0A1E3C; --cyan: #3FD0F5;
+  --sky: #E8F6FD; --sel: #E8F6FD;
+  --success: #1E9E6A; --warning: #F2A33A; --danger: #D64545;
+  --success-bg: rgba(30,158,106,.12); --warning-bg: rgba(242,163,58,.18); --danger-bg: rgba(214,69,69,.12);
+  --shadow: 0 8px 24px rgba(0,99,166,.10); --shadow-h: 0 14px 32px rgba(0,99,166,.18);
+  --brand: linear-gradient(135deg, #0A1E3C 0%, #0063A6 60%, #0096D6 100%);
+  --glow: linear-gradient(90deg, #0096D6, #3FD0F5);
+  --post-bg: #FFFFFF; --post-text: #1A2433; --post-muted: #5B6B80;
+  --font: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --r-sm: 12px; --r-md: 16px; --r-lg: 20px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #07111F; --surface: #0E1B2E; --surface-2: #0B1727; --raised: #15253D;
+  --border: #22344F; --text: #E8EEF6; --muted: #93A4BA; --heading: #F1F5FB;
+  --blue: #2AB0EA; --cyan: #5EDBF8; --sky: #12304A; --sel: rgba(42,176,234,.12);
+  --success: #34C48B; --warning: #F5B556; --danger: #EF6A6A;
+  --success-bg: rgba(52,196,139,.16); --warning-bg: rgba(245,181,86,.20); --danger-bg: rgba(239,106,106,.16);
+  --shadow: 0 8px 24px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04); --shadow-h: 0 14px 32px rgba(0,0,0,.45);
+  --glow: linear-gradient(90deg, #2AB0EA, #5EDBF8);
+  color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #07111F; --surface: #0E1B2E; --surface-2: #0B1727; --raised: #15253D;
+  --border: #22344F; --text: #E8EEF6; --muted: #93A4BA; --heading: #F1F5FB;
+  --blue: #2AB0EA; --cyan: #5EDBF8; --sky: #12304A; --sel: rgba(42,176,234,.12);
+  --success: #34C48B; --warning: #F5B556; --danger: #EF6A6A;
+  --success-bg: rgba(52,196,139,.16); --warning-bg: rgba(245,181,86,.20); --danger-bg: rgba(239,106,106,.16);
+  --shadow: 0 8px 24px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04); --shadow-h: 0 14px 32px rgba(0,0,0,.45);
+  --glow: linear-gradient(90deg, #2AB0EA, #5EDBF8);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.6; transition: background .2s, color .2s; }
+h1, h2, h3 { color: var(--heading); margin: 0; text-wrap: balance; line-height: 1.25; }
+h1 { font-size: clamp(26px, 4vw, 34px); font-weight: 700; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 17px; font-weight: 600; }
+p { margin: 0; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.label { font-size: 13px; font-weight: 500; color: var(--muted); }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+
+/* Top bar */
+.top { background: var(--brand); color: #fff; padding-top: env(safe-area-inset-top, 0px); position: relative; }
+.top::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--glow); }
+.top-in { max-width: 1080px; margin: 0 auto; padding: 12px 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; color: #fff; background: none; border: 0; padding: 0; }
+.tag { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: #8FE6FB; border: 1px solid rgba(143,230,251,.5); padding: 2px 8px; border-radius: 999px; }
+.steps { display: flex; gap: 6px; align-items: center; margin-left: auto; }
+.step-dot { width: 22px; height: 6px; border-radius: 99px; background: rgba(255,255,255,.25); }
+.step-dot.done { background: #8FE6FB; }
+.step-dot.now { width: 34px; background: linear-gradient(90deg, #3FD0F5, #fff); }
+.step-text { font-size: 12px; color: rgba(255,255,255,.85); margin-left: 6px; }
+.top-actions { display: flex; gap: 6px; align-items: center; }
+.top-btn { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22); color: #fff; border-radius: 10px; padding: 6px 10px; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
+.top-btn:hover { background: rgba(255,255,255,.2); }
+.top-btn svg { width: 16px; height: 16px; }
+
+/* Page */
+.wrap { max-width: 1080px; margin: 0 auto; padding: 28px 16px 64px; display: flex; flex-direction: column; gap: 28px; }
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.between { justify-content: space-between; }
+.stack { display: flex; flex-direction: column; gap: 12px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); box-shadow: var(--shadow); padding: 20px; min-width: 0; }
+
+/* Buttons */
+.btn { border-radius: var(--r-sm); padding: 10px 18px; font-weight: 600; border: 1px solid var(--blue); background: var(--surface); color: var(--blue); transition: transform .15s ease-out, box-shadow .15s, opacity .15s; display: inline-flex; align-items: center; gap: 8px; justify-content: center; }
+.btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: var(--shadow); }
+.btn.primary { background: var(--glow); color: #04223A; border: 0; }
+.btn.ghost { border: 0; background: transparent; padding: 6px 4px; }
+.btn.danger { border-color: var(--danger); color: var(--danger); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn.wide { width: 100%; }
+.link { background: none; border: 0; padding: 0; color: var(--blue); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Hero */
+.hero { background: var(--brand); border-radius: var(--r-lg); padding: 28px; color: #fff; position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; }
+.hero::before { content: ""; position: absolute; width: 380px; height: 380px; right: -120px; top: -160px; background: radial-gradient(circle, rgba(63,208,245,.35), transparent 65%); pointer-events: none; }
+.hero h1 { color: #fff; }
+.hero > * { position: relative; min-width: 0; }
+.persona { display: flex; gap: 14px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
+.avatar { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; background: #0A1E3C; color: #fff; box-shadow: 0 0 0 3px #3FD0F5; flex: none; }
+.pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+.pill-glass { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.3); color: #fff; border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 600; }
+.pill-glass:hover { background: rgba(255,255,255,.22); }
+.btn.on-hero { background: #fff; color: #0063A6; border: 0; padding: 14px 22px; font-size: 16px; }
+
+/* Accounts */
+.accounts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.accounts.two { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.start { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 20px; align-items: stretch; }
+.start form textarea { flex: 1; min-height: 140px; }
+.start .btn { align-self: flex-end; }
+.badge { align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); background: var(--sel); border-radius: 999px; padding: 2px 8px; }
+.choice .like { font-size: 12px; color: var(--muted); font-style: italic; }
+.acc { text-align: left; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 0 0 18px; box-shadow: var(--shadow); transition: transform .18s ease-out, box-shadow .18s, border-color .18s; overflow: hidden; display: flex; flex-direction: column; gap: 10px; }
+.acc::before { content: ""; display: block; height: 4px; background: var(--glow); }
+.acc > * { margin: 0 18px; }
+.acc:hover { transform: translateY(-4px); box-shadow: var(--shadow-h); border-color: var(--blue); }
+.acc-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--sky); display: grid; place-items: center; color: var(--blue); margin-top: 14px; }
+.acc-icon svg { width: 20px; height: 20px; }
+.acc-name { font-weight: 600; color: var(--heading); line-height: 1.3; }
+
+/* Note box */
+.note { display: flex; gap: 10px; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 8px 8px 8px 20px; box-shadow: inset 0 1px 3px rgba(0,0,0,.06); }
+.note input { flex: 1; min-width: 0; border: 0; background: transparent; padding: 10px 0; outline: none; }
+.send { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--glow); color: #04223A; display: grid; place-items: center; flex: none; }
+.send svg { width: 20px; height: 20px; }
+
+/* Table */
+.table-wrap { overflow-x: auto; border-radius: var(--r-md); border: 1px solid var(--border); background: var(--surface); box-shadow: var(--shadow); }
+table { width: 100%; border-collapse: collapse; min-width: 640px; }
+th, td { text-align: left; padding: 12px 16px; vertical-align: top; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--border); }
+tbody tr:nth-child(even) { background: var(--surface-2); }
+td.first { max-width: 320px; color: var(--muted); }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+.ex { font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0 6px; margin-left: 6px; }
+
+/* Summary strip + recorded card */
+.strip { background: var(--sel); border: 1px solid var(--border); border-left: 4px solid var(--blue); border-radius: var(--r-sm); padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; }
+.strip b { color: var(--heading); }
+.recorded { background: var(--sel); border-radius: var(--r-md); padding: 18px 20px; border-left: 4px solid var(--blue); display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+.recorded > div { min-width: 0; }
+select, textarea, .input { width: 100%; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface); padding: 10px 12px; }
+textarea { min-height: 110px; resize: vertical; line-height: 1.6; }
+
+/* Choice cards */
+.choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.choices.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.choice { text-align: left; background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--r-md); padding: 18px; display: flex; flex-direction: column; gap: 8px; transition: border-color .15s, background .15s, transform .15s; position: relative; }
+.choice:hover { border-color: var(--blue); }
+.choice.on { border: 2px solid var(--blue); background: var(--sel); }
+.choice.on::after { content: "Selected"; position: absolute; top: 14px; right: 14px; font-size: 12px; font-weight: 600; color: var(--blue); }
+.bars { display: flex; gap: 3px; align-items: flex-end; height: 18px; }
+.bars i { width: 6px; border-radius: 2px; background: var(--border); }
+.bars i.f { background: var(--blue); }
+.letter { width: 36px; height: 36px; border-radius: 50%; background: var(--glow); color: #04223A; font-weight: 700; display: grid; place-items: center; }
+
+/* Generating */
+.gen { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 40px 16px; text-align: center; }
+.ring { width: 54px; height: 54px; border-radius: 50%; background: conic-gradient(var(--blue), var(--cyan), transparent 70%); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 6px), #000 calc(100% - 5px)); mask: radial-gradient(farthest-side, transparent calc(100% - 6px), #000 calc(100% - 5px)); animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.skel { width: 100%; max-width: 560px; height: 70px; border-radius: var(--r-md); border: 1px dashed var(--border); background: linear-gradient(90deg, var(--surface) 0%, var(--sky) 50%, var(--surface) 100%); background-size: 200% 100%; animation: shimmer 1.6s ease-in-out infinite; }
+@keyframes shimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+
+/* Build */
+.progress { height: 8px; border-radius: 99px; background: var(--border); overflow: hidden; }
+.progress > i { display: block; height: 100%; background: var(--glow); transition: width .3s ease-out; }
+.sec { border-radius: var(--r-md); border: 1px solid var(--border); background: var(--surface); padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+.sec.active { border: 2px solid var(--blue); box-shadow: var(--shadow-h); }
+.sec.locked { background: var(--surface-2); border-style: dashed; color: var(--muted); }
+.sec-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
+.sec-name { font-weight: 600; color: var(--heading); display: flex; gap: 8px; align-items: center; }
+.sec.locked .sec-name { color: var(--muted); }
+.sec-text { white-space: pre-wrap; }
+.okpill { background: var(--success-bg); color: var(--success); border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 600; }
+.ver { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.ver button { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); }
+.ver button:disabled { opacity: .35; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { border: 1px solid var(--border); background: var(--surface); border-radius: 999px; padding: 5px 12px; font-size: 13px; }
+.chip.on { background: var(--sel); border-color: var(--blue); color: var(--blue); font-weight: 600; }
+.regen { border-top: 1px solid var(--border); padding-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+.notice { border-radius: var(--r-sm); padding: 10px 14px; font-size: 14px; background: var(--warning-bg); border-left: 4px solid var(--warning); }
+.notice.info { background: var(--sel); border-left-color: var(--blue); }
+.notice.err { background: var(--danger-bg); border-left-color: var(--danger); }
+.ico { width: 16px; height: 16px; flex: none; }
+
+/* Final check + post */
+.two-col { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.flag { border-radius: var(--r-sm); border: 1px solid var(--border); border-left: 4px solid var(--warning); padding: 14px 16px; background: var(--surface); display: flex; flex-direction: column; gap: 10px; }
+.flag.ok { border-left-color: var(--success); }
+.flag.bad { border-left-color: var(--danger); }
+.flag.done { opacity: .75; }
+.wash { background: linear-gradient(180deg, var(--sky), var(--bg)); border-radius: var(--r-lg); padding: 28px 16px; display: flex; justify-content: center; }
+.post { background: var(--post-bg); color: var(--post-text); border-radius: var(--r-md); box-shadow: 0 18px 40px rgba(10,30,60,.18); padding: 20px; width: 100%; max-width: 560px; border: 1px solid #E3EAF2; }
+.post-head { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; }
+.post-head .avatar { width: 44px; height: 44px; box-shadow: none; font-size: 14px; }
+.post-name { font-weight: 700; color: #0A1E3C; line-height: 1.2; }
+.post-role { font-size: 13px; color: var(--post-muted); }
+.post-body { white-space: pre-wrap; font-size: 15px; line-height: 1.6; }
+.post-body .ph { background: rgba(242,163,58,.22); border-radius: 4px; padding: 0 3px; }
+.post-body .tag-h { color: #0A66C2; font-weight: 600; }
+.src { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; padding: 3px 12px; font-size: 13px; background: var(--surface); }
+
+/* Login */
+.login { min-height: 100vh; background: var(--brand); display: grid; place-items: center; padding: 32px 16px; position: relative; overflow: hidden; }
+.login::before { content: ""; position: absolute; width: 520px; height: 520px; right: -160px; top: -200px; background: radial-gradient(circle, rgba(63,208,245,.3), transparent 65%); }
+.login-in { position: relative; width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 18px; }
+.login-card { background: var(--surface); border-radius: var(--r-md); padding: 28px; box-shadow: 0 24px 60px rgba(0,0,0,.3), inset 0 0 0 1px rgba(255,255,255,.4); display: flex; flex-direction: column; gap: 14px; }
+.login-title { color: #fff; font-size: 30px; font-weight: 700; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.login .top-btn { position: absolute; top: 16px; right: 16px; z-index: 1; }
+
+/* Drawer + toast */
+.scrim { position: fixed; inset: 0; background: rgba(5,15,30,.45); z-index: 20; }
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(460px, 100%); background: var(--raised); z-index: 21; display: flex; flex-direction: column; box-shadow: -10px 0 40px rgba(0,0,0,.25); }
+.drawer-head { background: var(--brand); color: #fff; padding: calc(18px + env(safe-area-inset-top, 0px)) 20px 18px; display: flex; justify-content: space-between; align-items: center; }
+.drawer-head h2 { color: #fff; }
+.drawer-body { padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
+.drawer-body h3 { padding-bottom: 6px; border-bottom: 1px solid var(--sky); }
+.drawer-body ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+.res { display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+.res span:last-child { white-space: nowrap; font-size: 12px; font-weight: 600; }
+.st-ok { color: var(--success); } .st-wait { color: var(--warning); }
+.res b, .res a { color: var(--heading); font-weight: 600; }
+.res a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--blue); }
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--success); color: #fff; padding: 10px 18px; border-radius: 999px; font-weight: 600; z-index: 30; box-shadow: var(--shadow-h); }
+
+@media (max-width: 860px) {
+  .accounts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .two-col { grid-template-columns: 1fr; }
+  .start { grid-template-columns: 1fr; }
+  .hero { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .accounts, .accounts.two, .choices, .choices.two { grid-template-columns: 1fr; }
+  .steps .step-dot { display: none; }
+  .hero { padding: 22px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+
+<div id="app"></div>
+<div id="layer"></div>
+
+<script>
+(function () {
+"use strict";
+
+/* ---------- Knowledge ---------- */
+var ACCOUNTS = [
+  { id: "qld", name: "Dept of Education Queensland", short: "Dept of Education Qld", sector: "Education, Australia", topic: "AI in Education", tag: "#AIinEducation", suggest: "programme", icon: "cap", color: "#0096D6" },
+  { id: "sia", name: "Singapore Airlines", short: "Singapore Airlines", sector: "Aviation, Singapore", topic: "AI on the edge", tag: "#HybridAI", suggest: "pov", icon: "plane", color: "#3FD0F5" },
+  { id: "edb", name: "EDB Singapore", short: "EDB Singapore", sector: "Government agency, Singapore", topic: "Manufacturing", tag: "#Manufacturing", suggest: "announce", icon: "building", color: "#0063A6" },
+  { id: "epac", name: "ePac Flexibles", short: "ePac Flexibles", sector: "Flexible packaging", topic: "Labels and packaging", tag: "#Packaging", suggest: "pov", icon: "box", color: "#1E9E6A" }
+];
+// Post types, built from Mike's 9 LinkedIn posts. Word ranges come from his real posts.
+var LENGTHS = {
+  quick: { label: "Quick insight", min: 40, max: 70, keys: ["qpov", "qexample", "qwhy"], desc: "One sharp idea in three sentences", like: "Like his Remote Garage post (45 words)" },
+  announce: { label: "Announcement", min: 90, max: 130, keys: ["news", "means", "credit"], desc: "A partnership, launch or milestone", like: "Like his Rakuten AI and Wubble posts (106 to 116 words)" },
+  pov: { label: "Point of view", min: 140, max: 180, keys: ["thought", "example", "invite"], desc: "A belief, backed by one example, often with a link", like: "Like his Asia markets and leadership posts (166 to 170 words)" },
+  programme: { label: "Programme or cause", min: 140, max: 180, keys: ["challenge", "proof", "offer"], desc: "A real problem, the proof, and an offer to help", like: "Like his AI in education post (155 words)" },
+  recap: { label: "Event recap", min: 180, max: 220, keys: ["context", "takeaways", "forward"], desc: "Thanks, two takeaways, and what's next", like: "Like his Fortune Leaders Forum and Australia posts (201 to 203 words)" },
+  reflection: { label: "Personal reflection", min: 250, max: 310, keys: ["moment", "lesson", "athp", "believe"], desc: "A personal moment that leads to a lesson about people", like: "Like his graduation post (305 words). Needs a personal moment from Comms" }
+};
+Object.keys(LENGTHS).forEach(function (k) { LENGTHS[k].words = Math.round((LENGTHS[k].min + LENGTHS[k].max) / 2); });
+var SECTION_NAMES = {
+  qpov: "The point of view", qexample: "The example", qwhy: "Why it matters to me",
+  news: "The news", means: "What it means", credit: "Credit and what's next",
+  thought: "The opening thought", example: "The example", invite: "The invitation",
+  challenge: "The challenge", proof: "The proof", offer: "The offer and invitation",
+  context: "Thanks and context", takeaways: "My takeaways", forward: "What I'm carrying forward",
+  moment: "The moment", lesson: "The lesson", athp: "Where I've seen it at HP", believe: "What I believe"
+};
+var SECTION_GUIDE = {
+  qpov: "One sentence: a clear point of view about decisions, people or technology.",
+  qexample: "One sentence: the concrete HP example that proves it.",
+  qwhy: "One sentence: why this matters to Mike as a leader.",
+  news: "Open with 'Proud to share', 'Excited to announce' or 'Grateful for', then state the news plainly.",
+  means: "What it makes possible for people or customers, with one concrete example.",
+  credit: "Thank the team or partner (name people only if the request names them), then a forward look.",
+  thought: "A point of view on people, markets, leadership or technology, in Mike's reflective first person.",
+  example: "One concrete example (a programme, partner or customer) that shows the thought in action.",
+  invite: "What it means for the reader, then an invitation to share their perspective or start a conversation.",
+  challenge: "The real-world problem people face, stated with empathy.",
+  proof: "The evidence: a programme, number or result taken only from approved facts.",
+  offer: "What HP offers to help, then an invitation to leaders to start a conversation.",
+  context: "Thank the hosts or people involved and set the scene.",
+  takeaways: "Start with 'My two takeaways:' then two lines starting with a middle dot (·).",
+  forward: "What Mike will carry into what comes next, then appreciation for the people involved.",
+  moment: "A personal moment. Use ONLY what the request provides; otherwise write exactly [Personal moment from Mike, to be supplied by Comms].",
+  lesson: "The lesson Mike took from it about careers, people or leadership.",
+  athp: "Where Mike has seen this lesson play out at HP (a programme or team from the approved facts).",
+  believe: "His underlying belief about leadership and investing in people."
+};
+var OFF_LIMITS = ["pricing", "price increase", "price rise", "memory shortage", "memory supply", "dram", "nand", "earnings", "revenue", "forecast", "earnings guidance", "dell", "lenovo", "apple", "asus", "acer", "layoff", "layoffs", "unannounced", "tariff", "lawsuit"];
+var SOURCES = [
+  // [group, name, detail, status, url]  status: used | limited | covered | missing
+  ["hp", "EDB Singapore: Keep things simple", "2026 interview. Leadership style, edge AI, Garage 2.0, Singapore hub", "used", "https://www.edb.gov.sg/en/news-and-insights/keep-things-simple-hp-greater-asia-chief-michael-boyle-on-leading-the-tech-giant-beyond-hardware"],
+  ["hp", "Dong-A Ilbo: “PC 속으로 들어간 AI, 기업 업무성과 좌우한다”", "Provided as a title only; Korean news site not accessible to us. Need the link or a copy", "pending", ""],
+  ["hp", "New Straits Times, AI Transforming Workplaces (Print).jpg", "Provided as a Google Drive file; not yet shared with us", "pending", ""],
+  ["hp", "Sprinter: leaves Europe for new role in Asia", "Nov 2025. Career history", "used", "https://www.sprinter.com.au/hps-michael-boyle-leaves-europe-for-new-role-in-asia/"],
+  ["hp", "YouTube video", "Provided; video can't be read by the tool. Needs a transcript", "pending", "https://www.youtube.com/watch?v=oUwjSGKr9-0"],
+  ["hp", "Fortune: HP in Asia, Wubble, Changi Airport", "1 Sep 2026. AI PCs, on-device AI, HP IQ, regional differences", "used", "https://fortune.com/2026/09/01/hp-asia-ai-pcs-wubble-ai-changi-airport-michael-boyle/"],
+  ["hp", "LinkedIn post", "Covered by the 9 pasted posts", "covered", "https://lnkd.in/p/er7vrDuy"],
+  ["hp", "LinkedIn post", "Covered by the 9 pasted posts", "covered", "https://lnkd.in/p/eJ9guymW"],
+  ["hp", "LinkedIn post", "Covered by the 9 pasted posts", "covered", "https://lnkd.in/p/euthAaCb"],
+  ["hp", "LinkedIn post", "Covered by the 9 pasted posts", "covered", "https://lnkd.in/p/e3mErKkD"],
+  ["hp", "ETNews (Korean)", "21 May 2026. Photo caption only, no quotes from Mike", "limited", "https://m.etnews.com/20260521000139"],
+  ["hp", "Texintel: Global Head of Large Format", "Career history; farewell note to the NZ team", "used", "https://www.texintel.com/press-room/hp-name-michael-boyle-as-the-new-global-head-of-large-format-go-to-market"],
+  ["hp", "LinkedIn post", "Covered by the 9 pasted posts", "covered", "https://lnkd.in/p/eB-YZuae"],
+  ["hp", "LinkedIn post", "Covered by the 9 pasted posts", "covered", "https://lnkd.in/p/eBHK4Etq"],
+  ["hp", "WhatTheyThink video", "Provided; 29 May 2024 (drupa) video. Needs a transcript", "pending", "https://whattheythink.com/video/119596-exploring-hp-large-format-evolution-innovation-applications/"],
+  ["hp", "LinkedIn article: Creating equal opportunity for women in technology", "Provided; LinkedIn needs a login. Paste the text to use it", "pending", "https://www.linkedin.com/pulse/creating-equal-opportunity-women-technology-michael-boyle"],
+  ["hp", "PrintWeek: Closing the loop", "28 Sep 2023, sponsored. Sustainability, sharing best practice", "limited", "https://www.printweek.com/content/sponsored-content/closing-the-loop-how-to-be-a-truly-sustainable-business-and-why-it-matters"],
+  ["hp", "Printvergence: Future of large format printing", "4 Feb 2025 guest post from his print role", "limited", "https://printvergence.com/trends/future-of-large-format-printing-ai-sustainability-remote-innovation/"],
+  ["hp", "LinkedIn post", "Covered by the 9 pasted posts", "covered", "https://lnkd.in/p/eMHvJUkj"],
+  ["hp", "LinkedIn post", "Covered by the 9 pasted posts", "covered", "https://lnkd.in/p/ei3HHV2a"],
+  ["added", "Mike's LinkedIn posts (9, pasted 5 Oct 2026)", "Main source for voice and recent facts", "used", ""],
+  ["added", "PhilSTAR Tech: AI adoption in the Philippines", "13 Mar 2026. AI removing friction; SE Asia adoption", "used", "https://philstartech.com/enterprise/2026/03/13/17365/hp-sees-strong-ai-adoption-potential-in-the-philippines/"],
+  ["needed", "Brand voice and tone guidelines (written)", "Requested 5 Oct 2026", "requested", ""],
+  ["needed", "Product portfolio per lead account", "Requested 5 Oct 2026", "requested", ""],
+  ["needed", "Content purpose: celebrate partnerships or attract prospects", "Requested 5 Oct 2026", "requested", ""],
+  ["needed", "Main audience", "Requested 5 Oct 2026", "requested", ""],
+  ["needed", "Permission to name or tag the accounts", "Requested 5 Oct 2026", "requested", ""]
+];
+var SRC_LABELS = ["Voice profile", "LinkedIn: HP IDEA and HP AI Academy", "LinkedIn: Rakuten AI partnership", "LinkedIn: Wubble and Garage 2.0", "LinkedIn: Fortune Leaders Forum", "LinkedIn: SPARK and early careers", "LinkedIn: Make, not Manage", "LinkedIn: Leadership (Business Times)", "EDB Singapore interview", "Fortune, Sep 2026", "PhilSTAR Tech, Mar 2026", "Customer brief (waiting on HP)"];
+
+var PERSONA = [
+  "ROLE: You write LinkedIn posts as Michael (Mike) Boyle, Senior Vice President and Managing Director of HP Greater Asia, based in Singapore. You draft for HP's Communications team. A person reviews and approves every section before anything is used.",
+  "",
+  "WHO MIKE IS (use only these facts): Leads HP Greater Asia (Southeast Asia, Australia, New Zealand, Korea and Japan) from Singapore since late 2025. 10+ years at HP: Vice President Asia Pacific and Japan; Vice President and Managing Director Australia and New Zealand (Sydney); global head of HP's Large Format business (Barcelona, about three years); Senior Vice President and Managing Director Central and Eastern Europe (Barcelona, 2025). Earlier career at Oce and Canon. Leadership beliefs he states publicly: set a clear direction, keep things simple, keep priorities consistent; the best leaders create the conditions for others to find the answers; shift from control to clarity; do less, better; culture separates good companies from great ones; invest consistently in people.",
+  "",
+  "HOW HIS POSTS ARE BUILT (from 9 of his LinkedIn posts):",
+  "1. Opening: a point of view on people, markets, leadership or decisions (e.g. a line about Asia's markets or where real decisions get made). For news, open with a feeling word: Proud to share, Excited to announce, Grateful for.",
+  "2. The concrete thing: a programme, partner, event or number, stated plainly.",
+  "3. Why it matters: to people, culture, customers or the customer experience. AI is framed around humans staying at the centre, removing friction, hybrid and on-device AI, and accessibility.",
+  "4. Credit: thanks the team or partner. Name individuals ONLY if the request names them.",
+  "5. Close: an invitation (I'd welcome a conversation with..., I would love to hear your perspective in the comments) or a forward look (Excited for customers across Greater Asia to...). If the request includes a link, end with 'Read more here:' and the link.",
+  "",
+  "VOICE RULES: first person (I, we, our team, at HP). Warm, reflective, confident, never salesy. Medium-length sentences with the occasional short, punchy one. Plain words. He may use 'My two takeaways:' with middle-dot (·) bullets. He sometimes draws on HP heritage: Make, not Manage; The HP Way; Bill and Dave asking 'What can we contribute?'. Hashtags: none by default; at most 2, only when relevant to a programme, event or campaign. Exclamation marks: at most one, only in the final line, only to celebrate. No emojis. No hype words (revolutionary, game-changing, unleash, cutting-edge, synergy, leverage). British/Australian spelling (organisation, programme).",
+  "",
+  "THREE REAL POSTS, FOR STYLE ONLY (never reuse their sentences):",
+  "<<Excited to announce our expanded partnership with Rakuten in Japan this week to bring hybrid AI to life - an important step in defining the Future of Work and built with our Japanese customers in mind. Building Rakuten AI into HP AI PCs means combining intelligent hardware with advanced AI capabilities for a more seamless and secure experience. One of my favorite examples is users now being able to complete a Rakuten Travel booking, even while offline. That's a clear avenue to making tech capabilities more accessible no matter where you are. Proud of this milestone, and grateful for Nobuki Okado's leadership in bringing it to life and representing HP so well on the ground.>>",
+  "<<Proud to share that Wubble, one of the first startups to come through our HP Garage 2.0 program in Singapore, just hit a big milestone. HP is investing in the company to bring their AI audio tools, music, speech, and sound generation, onto select HP PCs and gaming devices, with much of that work running right on the device. This is exactly why we built Garage 2.0. Give promising startups real access to our engineering, our products, and our customers, and see what they build. Excited for customers across Greater Asia to get their hands on it starting this summer.>>",
+  "<<Something I have come to believe more firmly with every year of leading teams across different markets is that the best leaders are the ones who create the conditions for others to find the answers instead of having them all. ... the shift from control to clarity, the case for doing less better ... If any of it resonates with how you think about leadership, I would love to hear your perspective in the comments.>>",
+  "",
+  "APPROVED FACTS (cite the label in brackets as the source):",
+  "- HP IDEA has reached over 8,200 teachers and 135,000 students; Indonesia is one of five countries graduating from it this year. HP AI Academy offers free courses and certification for teachers and students, fellowships with university partners, and HP Futures gives educators a seat in setting direction (hpaiacademy.com). Mike's view: tools often arrive faster than the confidence to use them; teacher training is a key constraint on AI in education. [LinkedIn: HP IDEA and HP AI Academy]",
+  "- Expanded partnership with Rakuten in Japan builds Rakuten AI into HP AI PCs for hybrid AI; users can complete a Rakuten Travel booking offline. [LinkedIn: Rakuten AI partnership]",
+  "- HP Garage 2.0 is HP's startup programme in Singapore giving startups access to HP engineering, products and customers. Wubble, from the Garage 2.0 cohort, creates an adaptive soundtrack at Changi Airport that responds to the environment and weather; HP is investing in Wubble to bring AI audio tools onto select HP PCs and gaming devices, largely on-device. [LinkedIn: Wubble and Garage 2.0]",
+  "- At the Fortune Leaders Forum Mike's takeaways were: keep humans at the centre of AI-assisted decisions (critical judgement, emotional intelligence), and give teams a hybrid experience with quality face-to-face time and the right tools for focused work. HP's annual Work Relationship Index looks at where technology helps and where it still creates friction. [LinkedIn: Fortune Leaders Forum]",
+  "- SPARK graduate programme: 30 graduates from Malaysia, Singapore, Vietnam, the Philippines, Thailand and Indonesia. HP Business Resource Groups build confidence through mentorship and belonging. [LinkedIn: SPARK and early careers]",
+  "- Mike believes in Make, not Manage; culture separates good companies from great ones; The HP Way. [LinkedIn: Make, not Manage]",
+  "- HP positions itself at the compute level and the orchestration around the edge, reducing friction; HP has a manufacturing hub and R&D in Singapore. [EDB Singapore interview]",
+  "- AI PCs reduce cloud dependency, token costs and latency and keep IP on the device; HP IQ is an on-device assistant; adoption of AI differs by market (e.g. Japan waits for strong proof points). [Fortune, Sep 2026]",
+  "- AI can remove the friction of managing tasks so people focus on creating; strong AI adoption across Southeast Asia. [PhilSTAR Tech, Mar 2026]",
+  "",
+  "HARD RULES:",
+  "- Use ONLY the facts above and what the request provides. Do not invent products, partnerships, results, numbers, dates, events, quotes or people.",
+  "- HP has NOT confirmed what it provides to Dept of Education Queensland, Singapore Airlines, EDB Singapore or ePac Flexibles, or any results with them. Wherever such a detail belongs, write a square-bracket placeholder, e.g. [HP solution, to be confirmed] or [Outcome, to be confirmed by HP]. Do not imply a facts-from-another-account applies to them (e.g. Changi Airport is not Singapore Airlines; HP IDEA in Indonesia is not Queensland).",
+  "- Never write about pricing or price changes, memory or component supply, financial results or forecasts, competitors, unannounced products, legal or political topics.",
+  "- Never invent personal details about Mike (family, hobbies, travel, health). Never name his family members. Only use a personal detail if the request supplies it.",
+  "- Do not name or tag individuals unless the request names them. Do not tag organisations as @mentions; write their names plainly.",
+  "- Never present a fact as Mike's personal experience unless a source says so."
+].join("\n");
+
+/* ---------- Demo content (used when live AI is unavailable) ---------- */
+function demoDirections(a, more) {
+  var who = a ? a.name.replace("Dept of", "Department of") : "the organisations we work with";
+  if (more) return [
+    { title: "The people behind it", summary: "Starts with the day-to-day reality of the people " + (a ? "at " + a.short : "we serve") + ", then how the work helps." },
+    { title: "Lessons for other leaders", summary: "What other organisations in the region can take from " + (a ? a.short : "this idea") + "." }
+  ];
+  return [
+    { title: "Celebrate the partnership", summary: "Thanks the teams at " + who + ", then what it means for the people they serve." },
+    { title: "Mike's view on the topic", summary: "Opens with his belief that technology should work in the background, then brings in " + (a ? a.short : "the idea") + "." }
+  ];
+}
+function demoSection(key, ctx, alt) {
+  var a = ctx.account, id = a ? a.id : "note";
+  var org = a ? "the " + a.name.replace("Dept of", "Department of") : "the teams we work with";
+  var who = a ? a.short : "our partners";
+  var FACT = {
+    qld: ["HP IDEA has now reached over 8,200 teachers and 135,000 students, and the lesson keeps repeating: confidence matters as much as the tools.", "LinkedIn: HP IDEA and HP AI Academy"],
+    sia: ["When AI runs on the device, responses are faster and data stays closer to home. In Japan, our work with Rakuten AI means a travel booking can be completed even while offline.", "LinkedIn: Rakuten AI partnership"],
+    edb: ["Through Garage 2.0 in Singapore, startups get real access to HP's engineering, products and customers, and some, like Wubble, are already building on HP devices.", "LinkedIn: Wubble and Garage 2.0"],
+    epac: ["[Proof point for ePac, to be confirmed by HP]", "Customer brief (waiting on HP)"],
+    note: ["[Example or proof point, to be confirmed by Comms]", "Customer brief (waiting on HP)"]
+  };
+  var f = FACT[id];
+  var T = {
+    qpov: alt ? "Good technology should make the next decision easier, not harder." : "The best decisions are made close to the people they affect.",
+    qexample: a ? "That's what we're working towards with " + who + " and [HP solution, to be confirmed]." : "That's the thinking behind what our teams are building across the region.",
+    qwhy: alt ? "That kind of clarity is what I want for every team I work with." : "Clarity like that is what I want every team I lead to have.",
+    news: alt ? "Excited to share a milestone with " + org + " this week: [milestone, to be confirmed by HP]." : "Proud to share the work HP is doing with " + org + ". Together we're bringing [HP solution, to be confirmed] to the people who rely on it every day, and it's a milestone I've been looking forward to sharing.",
+    means: alt ? f[0] : "What I like most is what it makes possible. [What changes for people, to be confirmed]. It's a good example of technology working quietly in the background, so people can spend their time on the work that matters rather than on managing tools.",
+    credit: alt ? "Proud of this milestone, and of everyone who made it happen. Onward and upward!" : "Grateful to the teams at " + who + " and at HP who brought this to life and represent us so well on the ground. Excited to see where it goes next.",
+    thought: alt ? "I've come to believe the most useful technology is the kind people barely notice." : "Every market across Asia has its own pace and character, and some of the best ideas I've seen start by paying attention to that difference. The organisations doing well with AI aren't the ones with the most tools. They're the ones that are clear about what they want their people to be able to do.",
+    example: (alt && a) ? "With " + who + ", that looks like [HP solution, to be confirmed]." : f[0] + " It's a reminder that progress comes from people feeling confident, not just from new technology arriving.",
+    invite: alt ? "I'd welcome a conversation with anyone working through the same questions." : "For me, that's the real question for leaders right now: not whether to use AI, but how to keep people at the centre of the decisions it supports. If this resonates with how you're thinking about " + (a ? a.topic.toLowerCase() : "the year ahead") + ", I'd love to hear your perspective in the comments.",
+    challenge: id === "qld" ? (alt ? "Teachers are being asked to make big calls about AI in their classrooms, usually with very little support." : "AI is arriving in classrooms faster than most teachers can be trained to use it well. Teachers are already making judgement calls about it every day, often with very little support, and that gap is holding back what AI could do for students.") : (alt ? "Many teams want to use AI well, but confidence often lags behind the tools." : "Most organisations I speak with aren't short of technology. They're short of the time and confidence to use it well. People are being asked to make decisions about AI every day, often without much support, and that gap holds back what the technology could do."),
+    proof: f[0] + " Wherever we've seen real progress, it has started with investing in people first.",
+    offer: id === "qld" ? "HP AI Academy offers free courses and certification for teachers and students, fellowships with university partners, and a voice for educators through HP Futures. If you're an education leader thinking about where to start with AI, I'd welcome a conversation." : "[HP offer, to be confirmed]. The aim is simple: give people the skills and confidence to use technology well, not just access to it. If you're working through the same challenge, I'd welcome a conversation.",
+    context: alt ? "Great to spend time with " + who + " this week [event, to be confirmed by Comms]." : "Grateful to join " + who + " and the HP team this week at [event, to be confirmed by Comms]. AI, data, security and customer expectations are increasingly tangled together, and it was valuable to spend time with people working through those questions in real organisations. It's the kind of room where the most useful ideas come from listening rather than presenting.",
+    takeaways: "My two takeaways:\n· Organisations will need to transform with AI, but keeping people at the centre of the decisions it supports matters more than ever. Judgement and emotional intelligence don't get automated.\n· Teams need the best of both worlds: real time together, and the right tools for focused work when they're apart.",
+    forward: "I'm carrying these questions into the weeks ahead, especially where technology is genuinely helping and where it may still be creating friction for people. Conversations like this are where I learn the most, and I'm grateful to everyone who made the time.",
+    moment: "[Personal moment from Mike, to be supplied by Comms]",
+    lesson: alt ? "It reminded me how much good leadership is about clarity rather than control." : "It reminded me that the best leaders create the conditions for others to find the answers, rather than having them all. The shift that matters most is from control to clarity: being clear about direction and priorities, then trusting people to find their own way there. Doing less, but doing it better, is part of that too.",
+    athp: id === "qld" ? f[0] : "I see it in our SPARK graduate programme, where the latest cohort brings together 30 graduates from Malaysia, Singapore, Vietnam, the Philippines, Thailand and Indonesia. And I see it in HP's Business Resource Groups, where mentorship and a sense of belonging help people find their confidence and realise their perspective matters. None of that happens by accident.",
+    believe: "Investing in people, consistently and on purpose, is still the best decision a leader can make. It builds the next generation of leaders, and in my experience they're the ones who end up moving everything forward."
+  };
+  var SRC = { qpov: "Voice profile", qexample: "Customer brief (waiting on HP)", qwhy: "Voice profile", news: "Customer brief (waiting on HP)", means: alt ? f[1] : "Customer brief (waiting on HP)", credit: "Voice profile",
+    thought: alt ? "Voice profile" : "Fortune, Sep 2026", example: (alt && a) ? "Customer brief (waiting on HP)" : f[1], invite: "Voice profile", challenge: id === "qld" ? "LinkedIn: HP IDEA and HP AI Academy" : "PhilSTAR Tech, Mar 2026", proof: f[1],
+    offer: id === "qld" ? "LinkedIn: HP IDEA and HP AI Academy" : "Customer brief (waiting on HP)", context: "Customer brief (waiting on HP)", takeaways: "LinkedIn: Fortune Leaders Forum", forward: "LinkedIn: Fortune Leaders Forum",
+    moment: "Customer brief (waiting on HP)", lesson: "LinkedIn: Leadership (Business Times)", athp: id === "qld" ? f[1] : "LinkedIn: SPARK and early careers", believe: "LinkedIn: SPARK and early careers" };
+  return { text: T[key], source: SRC[key] };
+}
+
+/* ---------- State ---------- */
+var S = {
+  view: "login", account: null, note: "", fromNew: false, length: "pov",
+  directions: [], dirMore: false, dir: 0, dirReason: [], dirNote: "", showDirPanel: false,
+  sections: [], tags: [], useTags: false, link: "", current: 0, flags: [], final: null, demo: false, live: null,
+  error: "", busy: false, drawer: null, toast: "", editing: -1, regenOpen: -1, regenReasons: [], regenNote: "", warnLater: false
+};
+var history = loadHistory();
+var ctl = null;
+
+function store(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+function load(k) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
+function loadHistory() {
+  var h = load("mp-history-v2");
+  if (h && h.length) return h;
+  return [
+    { date: "Example", account: "Dept of Education Qld", color: "#0096D6", topic: "AI in Education", text: "AI is already showing up in classrooms, and teachers are the ones deciding how it gets used.\n\nProud of HP's partnership with the Department of Education Queensland. Together we're working on [HP solution, to be confirmed], with one simple aim: give teachers more time for the work that matters.\n\nThank you to the teams in Queensland and at HP making this happen. Onward and upward!\n\n#AIinEducation", length: "announce", sources: ["Voice profile", "Customer brief (waiting on HP)", "LinkedIn: Make, not Manage"], example: true },
+    { date: "Example", account: "Singapore Airlines", color: "#3FD0F5", topic: "AI on the edge", text: "Not every AI task needs to go to the cloud.\n\nWhen AI runs on the device, data stays closer to home, responses are faster and people aren't waiting on a connection. That's a clear way to make technology more accessible, wherever you are.\n\nProud to be working with Singapore Airlines on [HP solution, to be confirmed]. I'd welcome a conversation with any leader thinking about where hybrid AI fits for their teams.", length: "pov", sources: ["Fortune, Sep 2026", "LinkedIn: Rakuten AI partnership", "Customer brief (waiting on HP)"], example: true }
+  ];
+}
+var theme = load("mp-theme");
+if (theme) document.documentElement.setAttribute("data-theme", theme);
+
+/* live AI */
+var samplePromise = (window.claude && window.claude.use) ? window.claude.use("sample") : Promise.resolve(null);
+samplePromise.then(function (s) { S.live = s; render(); }, function () { S.live = null; });
+
+/* ---------- Helpers ---------- */
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+function words(t) { return (t.trim().match(/\S+/g) || []).length; }
+function topicOf() { return S.account ? S.account.topic : "From your note"; }
+function nameOf() { return S.account ? S.account.name : "From a note"; }
+function assembled() { return S.sections.map(function (s) { return cur(s).text; }).join("\n\n"); }
+function finalText() { var x = assembled(); if (S.link) x += "\n\nRead more here: " + S.link; if (S.useTags && S.tags.length) x += "\n\n" + S.tags.join(" "); return x; }
+function rangeText(k) { var L = LENGTHS[k]; return L ? L.min + " to " + L.max + " words" : ""; }
+function cur(s) { return s.versions[s.v]; }
+function ctxObj() { return { account: S.account, length: S.length }; }
+function toast(t) { S.toast = t; renderLayer(); setTimeout(function () { S.toast = ""; renderLayer(); }, 1800); }
+var ICON = {
+  cap: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg>',
+  plane: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 14l-7-3 1-2 9 1 4-5c1-1 3-1 3 0s0 2-1 3l-5 4 1 9-2 1-3-7z"/></svg>',
+  building: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="3" width="10" height="18" rx="1"/><path d="M14 9h6v12h-6M7 7h4M7 11h4M7 15h4"/></svg>',
+  box: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7l9-4 9 4-9 4z"/><path d="M3 7v10l9 4 9-4V7M12 11v10"/></svg>',
+  lock: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>',
+  check: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5 9-10"/></svg>',
+  send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+  moon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"/></svg>'
+};
+function isDark() {
+  var t = document.documentElement.getAttribute("data-theme");
+  if (t) return t === "dark";
+  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+function themeBtn() { return '<button class="top-btn" data-a="theme" aria-label="Switch to ' + (isDark() ? "light" : "dark") + ' mode">' + (isDark() ? ICON.sun : ICON.moon) + '<span>' + (isDark() ? "Light" : "Dark") + '</span></button>'; }
+var STEP = { setup: 1, generating: 2, direction: 3, build: 4, check: 5, final: 6 };
+var STEP_LABEL = ["", "Set up the post", "Generating", "Choose a direction", "Build the post", "Final check", "Final post"];
+
+function topbar() {
+  var n = STEP[S.view], dots = "";
+  if (n) { for (var i = 1; i <= 6; i++) dots += '<span class="step-dot ' + (i < n ? "done" : i === n ? "now" : "") + '"></span>'; dots += '<span class="step-text">Step ' + n + ' of 6: ' + STEP_LABEL[n] + '</span>'; }
+  return '<header class="top"><div class="top-in"><button class="brand" data-a="home">Mike Persona <span class="tag">for HP Comms</span></button>' +
+    '<div class="steps">' + dots + '</div><div class="top-actions">' + themeBtn() + '<button class="top-btn" data-a="logout">Log out</button></div></div></header>';
+}
+function strip() {
+  var p = ['<span><b>' + esc(nameOf()) + '</b></span>', '<span>' + esc(topicOf()) + '</span>', '<span>' + LENGTHS[S.length].label + ' (' + rangeText(S.length) + ')</span>'];
+  if (S.note && S.account) p.push('<span>Note: ' + esc(S.note) + '</span>');
+  if (!S.account && S.note) p[1] = '<span>Note: ' + esc(S.note) + '</span>';
+  if (S.view === "build" || S.view === "check" || S.view === "final") p.push('<span>Direction ' + "ABCD".charAt(S.dir + (S.dirMore ? 2 : 0)) + ': ' + esc(S.directions[S.dir] ? S.directions[S.dir].title : "") + '</span>');
+  return '<div class="strip">' + p.join("") + '</div>';
+}
+function modeNote() {
+  if (S.demo) return '<div class="notice info">Live AI is off in this view, so you are seeing demo content written in Mike\'s style.</div>';
+  return "";
+}
+
+/* ---------- Views ---------- */
+function vLogin() {
+  return '<div class="login">' + themeBtn() + '<div class="login-in"><div class="login-title">Mike Persona <span class="tag">for HP Comms</span></div>' +
+    '<form class="login-card" data-f="login"><h2>Sign in</h2><p class="muted">Draft LinkedIn posts in Mike Boyle\'s voice.</p>' +
+    '<label class="label" for="pw">Demo password</label><input class="input" id="pw" type="password" placeholder="Any password works in this demo" autocomplete="off">' +
+    '<button class="btn primary wide" type="submit">Continue</button><p class="small muted">Demo prototype for HP Comms</p></form></div></div>';
+}
+function vHome() {
+  var accs = ACCOUNTS.map(function (a) {
+    return '<button class="acc" data-a="acc" data-id="' + a.id + '"><span class="acc-icon">' + ICON[a.icon] + '</span><span class="acc-name">' + esc(a.name) + '</span><span class="small muted">' + esc(a.topic) + '</span></button>';
+  }).join("");
+  var rows = history.map(function (h, i) {
+    var first = h.text.split("\n")[0];
+    return '<tr><td>' + esc(h.date) + (h.example ? '<span class="ex">example</span>' : "") + '</td><td><span class="dot" style="background:' + h.color + '"></span>' + esc(h.account) + '</td><td>' + esc(h.topic) + '</td><td class="first">' + esc(first) + '</td><td style="white-space:nowrap"><button class="btn ghost" data-a="hopen" data-i="' + i + '">Open</button> <button class="btn ghost" data-a="hcopy" data-i="' + i + '">Copy</button></td></tr>';
+  }).join("");
+  return topbar() + '<main class="wrap">' +
+    '<section class="hero"><div><h1>Draft as Mike</h1><div class="persona"><span class="avatar">MB</span><div><div style="font-weight:600">Mike Boyle, HP Greater Asia</div><div style="opacity:.85">Built from his public posts and blogs</div></div></div>' +
+    '<div class="pills"><button class="pill-glass" data-a="drawer" data-d="voice">Voice profile</button><button class="pill-glass" data-a="drawer" data-d="resources">Resource list</button><button class="pill-glass" data-a="drawer" data-d="guardrails">Guardrails</button></div></div>' +
+    '<div><button class="btn on-hero" data-a="new">Write new post</button></div></section>' +
+    '<section class="stack"><h2>What should Mike write about?</h2><div class="start">' +
+    '<div class="card stack"><div><h3>Write about an account</h3><p class="muted small">Pick one of HP\'s accounts and we\'ll write a post around it.</p></div><div class="accounts two">' + accs + '</div></div>' +
+    '<form class="card stack" data-f="note"><div><h3>Write about anything</h3><p class="muted small">Tell us what\'s on your mind and we\'ll turn it into a post in Mike\'s voice.</p></div><textarea id="noteIn" placeholder="What do you want Mike to post about?" aria-label="What do you want Mike to post about?"></textarea><button class="btn primary" type="submit">Write this post</button></form>' +
+    '</div></section>' +
+    '<section class="stack"><div class="row"><h2>History</h2><span class="muted small">every post generated in this browser</span></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Account</th><th>Topic</th><th>Post</th><th></th></tr></thead><tbody>' + rows + '</tbody></table></div></section>' +
+    '</main>';
+}
+function vSetup() {
+  var top;
+  if (S.fromNew) {
+    top = '<div class="card stack"><label class="label" for="accSel">Account</label><select id="accSel"><option value="">No specific account</option>' +
+      ACCOUNTS.map(function (a) { return '<option value="' + a.id + '"' + (S.account && S.account.id === a.id ? " selected" : "") + '>' + esc(a.name) + ' (' + esc(a.topic) + ')</option>'; }).join("") +
+      '</select><label class="label" for="noteNew">Note (optional)</label><textarea id="noteNew" placeholder="Anything the post should mention">' + esc(S.note) + '</textarea></div>';
+  } else if (S.account) {
+    top = '<div class="recorded"><div><div class="label">Account</div><h3 style="margin:4px 0">' + esc(S.account.name) + '</h3><div class="small muted">Suggested topic: ' + esc(S.account.topic) + '</div></div><button class="link" data-a="home">Change</button></div>';
+  } else {
+    top = '<div class="recorded"><div style="flex:1"><div class="label">Your note</div>' + (S.editNote ? '<textarea id="noteEdit">' + esc(S.note) + '</textarea>' : '<p style="margin-top:4px">' + esc(S.note) + '</p>') + '</div><button class="link" data-a="editnote">' + (S.editNote ? "Done" : "Edit") + '</button></div>';
+  }
+  var sug = S.account ? S.account.suggest : "pov";
+  var lens = Object.keys(LENGTHS).map(function (k) {
+    var L = LENGTHS[k];
+    return '<button class="choice' + (S.length === k ? " on" : "") + '" data-a="len" data-k="' + k + '">' + (k === sug ? '<span class="badge">Suggested</span>' : "") + '<b>' + L.label + '</b><span>' + esc(L.desc) + '</span><span class="small muted">' + rangeText(k) + ' · ' + L.keys.length + ' sections</span><span class="like">' + esc(L.like) + '</span></button>';
+  }).join("");
+  return topbar() + '<main class="wrap"><div class="stack"><button class="link" style="align-self:flex-start" data-a="home">Back to Home</button><h1>New post</h1></div>' + top +
+    '<section class="stack"><h2>What kind of post is this?</h2><p class="muted">Each type follows the shape and length of Mike\'s own posts.</p><div class="choices">' + lens + '</div></section>' +
+    '<section class="stack"><label class="label" for="linkIn">Link to include (optional)</label><input class="input" id="linkIn" placeholder="e.g. a news story or programme page" value="' + esc(S.link) + '"><span class="small muted">Added at the end as "Read more here:", the way Mike shares articles.</span></section>' +
+    '<button class="btn primary" style="align-self:flex-end;min-width:200px" data-a="continue">Continue</button></main>';
+}
+function vGenerating(msg) {
+  return topbar() + '<main class="wrap">' + strip() + '<div class="card gen"><div class="ring" role="status" aria-label="Working"></div><p class="muted">' + esc(msg) + '</p>' +
+    (S.error ? '<div class="notice err" style="text-align:left">' + esc(S.error) + '</div><div class="row"><button class="btn" data-a="retry">Try again</button><button class="btn" data-a="usedemo">Use demo content</button></div>' : '<div class="skel"></div><div class="skel"></div><button class="btn ghost" data-a="stop">Stop</button>') +
+    '</div>' + modeNote() + '</main>';
+}
+function vDirection() {
+  var off = S.dirMore ? 2 : 0;
+  var cards = S.directions.map(function (d, i) {
+    return '<button class="choice' + (S.dir === i ? " on" : "") + '" data-a="pickdir" data-i="' + i + '"><span class="letter">' + "ABCD".charAt(i + off) + '</span><h3>' + esc(d.title) + '</h3><span>' + esc(d.summary) + '</span></button>';
+  }).join("");
+  var reasons = ["Too formal", "Too salesy", "Wrong focus", "Not like Mike"];
+  var panel = S.showDirPanel ? '<div class="card stack"><b>What should change?</b><div class="chips">' + reasons.map(function (r) { return '<button class="chip' + (S.dirReason.indexOf(r) > -1 ? " on" : "") + '" data-a="dirreason" data-r="' + r + '">' + r + '</button>'; }).join("") +
+    '</div><input class="input" id="dirNote" placeholder="Add a note (optional), e.g. more about teachers" value="' + esc(S.dirNote) + '"><div class="row"><button class="btn" data-a="moredirs">Show directions</button><button class="btn ghost" data-a="closedirpanel">Cancel</button></div></div>' : "";
+  return topbar() + '<main class="wrap">' + strip() + modeNote() + '<section class="stack"><h1>Pick a direction</h1><p class="muted">Each direction is a different way into the post. You can change your mind later.</p><div class="choices two">' + cards + '</div>' +
+    '<div class="row">' + (S.dirMore ? '<button class="link" data-a="backdirs">Back to A and B</button>' : '<button class="link" data-a="opendirpanel">Neither fits? Show two other directions</button>') + '</div>' + panel + '</section>' +
+    '<button class="btn primary" style="align-self:flex-end;min-width:220px" data-a="usedir">Use direction ' + "ABCD".charAt(S.dir + off) + '</button></main>';
+}
+function vBuild() {
+  var done = S.sections.filter(function (s) { return s.approved; }).length, total = S.sections.length;
+  var list = S.sections.map(function (s, i) {
+    var name = '<span class="sec-name">' + (i + 1) + '. ' + esc(s.name) + '</span>';
+    if (i === S.current && !s.approved) return secActive(s, i, name);
+    if (s.approved && S.editing !== i) return '<div class="sec"><div class="sec-head">' + name + '<span class="row"><span class="okpill">Approved</span><button class="btn ghost" data-a="edit" data-i="' + i + '">Edit</button></span></div><p class="sec-text small muted">' + esc(cur(s).text) + '</p></div>';
+    if (s.approved && S.editing === i) return secActive(s, i, name);
+    return '<div class="sec locked"><div class="sec-head">' + name + '<span class="small row">' + ICON.lock + 'Unlocks after section ' + i + '</span></div></div>';
+  }).join("");
+  return topbar() + '<main class="wrap">' + strip() + modeNote() +
+    '<section class="stack"><div class="row between"><h1>Build the post</h1><button class="link" data-a="redirect">Choose a different direction</button></div>' +
+    '<div class="row between"><b>' + done + ' of ' + total + ' sections approved</b><span class="small muted">' + words(assembled()) + ' words so far · aim for ' + rangeText(S.length) + '</span></div><div class="progress"><i style="width:' + (done / total * 100) + '%"></i></div>' +
+    (S.warnLater ? '<div class="notice">You changed an earlier section. Check the sections after it still fit.</div>' : "") +
+    (S.error ? '<div class="notice err">' + esc(S.error) + '</div>' : "") +
+    '<div class="stack">' + list + '</div></section>' +
+    '<button class="btn primary" style="align-self:flex-end;min-width:220px" data-a="preview"' + (done < total ? " disabled" : "") + '>Preview full post</button></main>';
+}
+function secActive(s, i, name) {
+  var c = cur(s), n = s.versions.length, editing = S.editing === i;
+  var ver = n > 1 ? '<span class="ver"><button data-a="vprev" data-i="' + i + '" aria-label="Previous version"' + (s.v === 0 ? " disabled" : "") + '>&lsaquo;</button>Version ' + (s.v + 1) + ' of ' + n + '<button data-a="vnext" data-i="' + i + '" aria-label="Next version"' + (s.v === n - 1 ? " disabled" : "") + '>&rsaquo;</button></span>' : '<span class="small muted">Ready for review</span>';
+  var body = s.loading ? '<div class="skel" style="max-width:none"></div><p class="small muted">Rewriting in Mike\'s voice&hellip;</p>' :
+    editing ? '<textarea id="edit-' + i + '">' + esc(c.text) + '</textarea><div class="row"><button class="btn primary" data-a="saveedit" data-i="' + i + '">Save</button><button class="btn ghost" data-a="canceledit">Cancel</button></div>' :
+    '<p class="sec-text">' + esc(c.text) + '</p><p class="small muted">Source: ' + esc(c.source || "Voice profile") + '</p>' +
+    '<div class="row"><button class="btn primary" data-a="approve" data-i="' + i + '">' + ICON.check + 'Approve</button><button class="btn" data-a="regen" data-i="' + i + '">Regenerate</button><button class="btn" data-a="edit" data-i="' + i + '">Edit</button></div>';
+  var reasons = ["Too formal", "Too long", "Not like Mike", "Wrong focus"];
+  var panel = (S.regenOpen === i && !s.loading && !editing) ? '<div class="regen"><b class="small">Why regenerate?</b><div class="chips">' + reasons.map(function (r) { return '<button class="chip' + (S.regenReasons.indexOf(r) > -1 ? " on" : "") + '" data-a="rreason" data-r="' + r + '">' + r + '</button>'; }).join("") +
+    '</div><input class="input" id="regenNote" placeholder="Add a note (optional)" value="' + esc(S.regenNote) + '"><div class="row"><button class="btn primary" data-a="doregen" data-i="' + i + '">Rewrite this section</button><button class="btn ghost" data-a="closeregen">Cancel</button></div><p class="small muted">Earlier versions are kept; use the arrows to go back.</p></div>' : "";
+  return '<div class="sec active"><div class="sec-head">' + name + ver + '</div>' + body + panel + '</div>';
+}
+function vCheck() {
+  var all = S.flags.every(function (f) { return f.ok || f.resolved; });
+  var flags = S.flags.map(function (f, i) {
+    var cls = f.ok ? "ok" : f.kind === "danger" ? "bad" : "";
+    var actions = f.ok ? "" : f.resolved ? '<p class="small"><b>Kept:</b> ' + esc(f.reason) + ' <button class="link" data-a="unkeep" data-i="' + i + '">Undo</button></p>' :
+      (f.keeping ? '<input class="input" id="keep-' + i + '" placeholder="Why keep it? e.g. HP will confirm before posting"><div class="row"><button class="btn" data-a="savekeep" data-i="' + i + '">Save reason</button><button class="btn ghost" data-a="cancelkeep" data-i="' + i + '">Cancel</button></div>' :
+      '<div class="row"><button class="btn" data-a="fix" data-i="' + i + '">Fix</button><button class="btn ghost" data-a="keep" data-i="' + i + '">Keep</button></div>');
+    return '<div class="flag ' + cls + (f.resolved ? " done" : "") + '"><b>' + esc(f.title) + '</b><span class="small muted">' + esc(f.detail) + '</span>' + actions + '</div>';
+  }).join("");
+  return topbar() + '<main class="wrap">' + strip() + '<h1>Final check</h1><div class="two-col"><div class="stack"><div class="wash">' + postCard(finalText()) + '</div>' + (S.tags.length ? '<label class="row small" for="tagToggle"><input type="checkbox" id="tagToggle"' + (S.useTags ? ' checked' : '') + '> Add hashtags: ' + esc(S.tags.join(' ')) + ' <span class="muted">(Mike uses them in 2 of 9 posts)</span></label>' : '') + '</div>' +
+    '<div class="stack"><h2>Before you finish</h2>' + flags + '<button class="btn primary" data-a="markfinal"' + (all ? "" : " disabled") + '>Mark as final</button>' + (all ? "" : '<p class="small muted">Fix each amber or red item, or keep it with a reason.</p>') + '</div></div></main>';
+}
+function vFinal() {
+  var f = S.final;
+  var srcs = f.sources.map(function (s) { return '<span class="src">' + esc(s) + '</span>'; }).join("");
+  return topbar() + '<main class="wrap">' + (f.fromHistory ? "" : strip()) + '<div class="row between"><h1>Final post</h1><span class="muted">' + esc(LENGTHS[f.length] ? LENGTHS[f.length].label : "LinkedIn post") + ' · ' + words(f.text) + ' words</span></div>' +
+    '<div class="wash">' + postCard(f.text) + '</div><div class="stack"><b>Sources used</b><div class="chips">' + srcs + '</div></div>' +
+    '<div class="row"><button class="btn primary" data-a="copy">Copy</button>' + (f.fromHistory ? "" : '<button class="btn" data-a="backbuild">Edit</button>') + '<button class="btn" data-a="startnew">Start a new post</button></div>' +
+    '<p class="small muted">The app never posts to LinkedIn by itself. Copy the text and share it with Mike or paste it into LinkedIn.</p><textarea id="copyArea" aria-label="Post text" style="position:absolute;left:-9999px">' + esc(f.text) + '</textarea></main>';
+}
+function postCard(text) {
+  var html = esc(text).replace(/\[([^\]]+)\]/g, '<span class="ph">[$1]</span>').replace(/(^|\s)(#\w+)/g, '$1<span class="tag-h">$2</span>');
+  return '<article class="post"><div class="post-head"><span class="avatar">MB</span><div><div class="post-name">Michael Boyle</div><div class="post-role">SVP and MD, HP Greater Asia</div></div></div><div class="post-body">' + html + '</div></article>';
+}
+function vDrawer() {
+  var d = S.drawer, title, body;
+  if (d === "voice") {
+    title = "Voice profile";
+    body = '<p class="small muted">Built from 9 of Mike\'s LinkedIn posts (supplied 5 Oct 2026) and his 2025 to 2026 interviews. Version 2.</p>' +
+      '<h3>Who Mike is</h3><p>Senior Vice President and Managing Director, HP Greater Asia (Southeast Asia, Australia, New Zealand, Korea and Japan), based in Singapore since late 2025. More than 10 years at HP: Asia Pacific and Japan; Managing Director, Australia and New Zealand; global head of Large Format (Barcelona); Managing Director, Central and Eastern Europe. Earlier at Océ and Canon.</p>' +
+      '<h3>How his posts are built</h3><ul><li><b>Opens</b> with a point of view on people, markets or leadership. News opens with "Proud to share", "Excited to announce" or "Grateful for".</li><li><b>Then</b> the concrete thing: a programme, partner, event or number.</li><li><b>Then</b> why it matters to people, culture or the customer experience.</li><li><b>Credits</b> the team or the person who made it happen.</li><li><b>Closes</b> with an invitation ("I\'d welcome a conversation", "I would love to hear your perspective in the comments") or a forward look, often with "Read here:" and a link.</li></ul>' +
+      '<h3>Voice</h3><ul><li>First person, warm, reflective and confident; never salesy</li><li>Medium sentences with the occasional short, punchy line</li><li>Personal reflection when it serves the point (only details HP supplies)</li><li>HP heritage: Make, not Manage; The HP Way</li><li>British/Australian spelling</li></ul>' +
+      '<h3>By the numbers (9 posts)</h3><ul><li>45 to 305 words; most 105 to 205</li><li>Hashtags in 2 of 9 posts, never more than 2</li><li>One exclamation mark in 2 of 9 posts, always at the end</li><li>No emojis</li></ul>' +
+      '<h3>Themes he returns to</h3><ul><li>People, culture and early careers</li><li>Leadership: clarity over control, doing less better</li><li>AI with humans at the centre; hybrid and on-device AI</li><li>Asia as many markets, each with its own pace</li><li>Startups and Garage 2.0; AI in education</li></ul>';
+  } else if (d === "resources") {
+    title = "Resource list";
+    var LBL = { used: ["Used", "st-ok"], limited: ["Limited use", "st-wait"], covered: ["Covered", "st-ok"], pending: ["Not yet readable", "st-wait"], requested: ["Requested", "st-wait"] };
+    var row = function (s, n) {
+      var name = s[4] ? '<a href="' + esc(s[4]) + '" target="_blank" rel="noopener">' + esc(s[1]) + '</a>' : '<b>' + esc(s[1]) + '</b>';
+      return '<div class="res"><span>' + (n ? '<span class="muted small">' + n + '. </span>' : "") + name + '<br><span class="muted small">' + esc(s[2]) + '</span></span><span class="' + LBL[s[3]][1] + '">' + LBL[s[3]][0] + '</span></div>';
+    };
+    var hp = SOURCES.filter(function (s) { return s[0] === "hp"; });
+    var count = function (st) { return hp.filter(function (s) { return s[3] === st; }).length; };
+    body = '<p class="small muted">As of 5 Oct 2026. From HP\'s 20 inputs: ' + count("used") + ' used, ' + count("limited") + ' limited, ' + count("covered") + ' LinkedIn links covered by the pasted posts, ' + count("pending") + ' provided but not yet readable.</p>' +
+      '<h3>Mike\'s persona inputs from HP (20)</h3><div>' + hp.map(function (s, i) { return row(s, i + 1); }).join("") + '</div>' +
+      '<h3>Added by BridgeAI</h3><div>' + SOURCES.filter(function (s) { return s[0] === "added"; }).map(function (s) { return row(s); }).join("") + '</div>' +
+      '<h3>HP messaging topics (7)</h3><p class="small">AI on the edge / hybrid AI · AI in Education · Printing labels and packaging · Security · Memory supply (off-limits until HP gives approved wording) · HP Solutions · Manufacturing. Topic names only so far.</p>' +
+      '<h3>Customer accounts (4)</h3><div>' + [["Singapore Airlines", "https://www.singaporeair.com/en_UK/jp/home/"], ["EDB Singapore", "https://www.edb.gov.sg/en"], ["Department of Education Queensland", "https://education.qld.gov.au/"], ["ePac Flexibles", "https://epacflexibles.com/"]].map(function (a) { return '<div class="res"><a href="' + a[1] + '" target="_blank" rel="noopener">' + a[0] + '</a><span class="muted small">' + a[1].replace(/^https:\/\/(www\.)?/, "").split("/")[0] + '</span></div>'; }).join("") + '</div>' +
+      '<h3>Requested from HP</h3><div>' + SOURCES.filter(function (s) { return s[0] === "needed"; }).map(function (s) { return row(s); }).join("") + '</div>';
+  } else {
+    title = "Guardrails";
+    body = '<h3>Never writes about</h3><ul><li>Pricing or price changes</li><li>Memory or component supply</li><li>Financial results, earnings or forecasts</li><li>Competitors</li><li>Unannounced products</li><li>Legal or political topics</li></ul>' +
+      '<h3>Facts</h3><ul><li>Uses only facts from the resource list and what you type into the post</li><li>Never invents products, partnerships, results, numbers, dates, events or quotes</li><li>What HP provides to each lead account is not yet confirmed, so it appears as a [placeholder]</li><li>Doesn\'t carry facts from one account to another (Changi Airport is not Singapore Airlines; HP IDEA in Indonesia is not Queensland)</li></ul>' +
+      '<h3>People</h3><ul><li>Never invents personal details about Mike, and never names his family</li><li>Names or tags people only when you give their names</li></ul>' +
+      '<h3>Voice</h3><ul><li>No hype words, no emojis</li><li>Hashtags: none by default, at most 2</li><li>At most one exclamation mark, at the end</li></ul>' +
+      '<h3>Process</h3><ul><li>Every section is approved by a person before the post is final</li><li>Final check flags placeholders, off-limits words and length</li><li>The app never posts to LinkedIn</li><li>Don\'t paste confidential HP information until HP confirms its rules for AI tools</li></ul>';
+  }
+  return '<div class="scrim" data-a="closedrawer"></div><aside class="drawer" role="dialog" aria-label="' + title + '"><div class="drawer-head"><h2>' + title + '</h2><button class="top-btn" data-a="closedrawer">Close</button></div><div class="drawer-body">' + body + '</div></aside>';
+}
+
+/* ---------- Render ---------- */
+var app = document.getElementById("app"), layer = document.getElementById("layer");
+function render() {
+  var v = S.view, h;
+  if (v === "login") h = vLogin();
+  else if (v === "home") h = vHome();
+  else if (v === "setup") h = vSetup();
+  else if (v === "generating") h = vGenerating(S.genMsg || "Writing two directions in Mike's voice");
+  else if (v === "direction") h = vDirection();
+  else if (v === "build") h = vBuild();
+  else if (v === "check") h = vCheck();
+  else if (v === "final") h = vFinal();
+  app.innerHTML = h;
+  renderLayer();
+}
+function renderLayer() { layer.innerHTML = (S.drawer ? vDrawer() : "") + (S.toast ? '<div class="toast" role="status">' + esc(S.toast) + '</div>' : ""); }
+function go(v) { S.view = v; S.error = ""; render(); window.scrollTo(0, 0); }
+
+/* ---------- AI calls ---------- */
+function ask(prompt, opts) {
+  if (!S.live || S.demo) return Promise.reject({ code: "demo" });
+  ctl = new AbortController();
+  var o = { signal: ctl.signal };
+  for (var k in opts) o[k] = opts[k];
+  return S.live.json(prompt, o);
+}
+function errCopy(e) {
+  var c = e && e.code;
+  if (c === "rate_limited") return "Claude is busy right now. Wait a moment, then try again.";
+  if (c === "session_expired") return "Your session has expired. Sign in to Claude again, then try again.";
+  if (c === "invalid_json") return "The answer came back in the wrong format. Try again.";
+  if (c === "refused") return "Claude declined this request. Change the note or direction and try again.";
+  return "Something went wrong while writing. Try again, or use demo content.";
+}
+function isHardOff(e) { var c = e && e.code; return c === "demo" || c === "not_granted" || c === "sampling_disabled" || c === "not_declared" || c === "capability_disabled" || c === "capability_removed"; }
+function brief() {
+  var b = "Account: " + (S.account ? S.account.name + " (" + S.account.sector + ")" : "none, the post starts from a note") + "\nTopic: " + topicOf();
+  if (S.note) b += "\nNote from HP Comms: " + S.note;
+  return b;
+}
+
+function genDirections(more) {
+  S.genMsg = more ? "Writing two other directions" : "Writing two directions in Mike's voice";
+  go("generating");
+  var a = S.account;
+  var prompt = PERSONA + "\n\nTASK: Propose two clearly different directions for one LinkedIn post by Mike.\n" + brief() +
+    (more ? "\nThe reader rejected these directions: " + S.directions.map(function (d) { return d.title; }).join("; ") + ". Reasons: " + (S.dirReason.join(", ") || "none given") + (S.dirNote ? ". Note: " + S.dirNote : "") + ". Offer two new ones." : "") +
+    '\nReply with only JSON: {"directions":[{"title":"3-6 word title","summary":"one sentence on how the post opens and what it focuses on"},{"title":"...","summary":"..."}]}';
+  ask(prompt, more ? { modelTier: "quick", cache: false } : { modelTier: "quick" }).then(function (r) {
+    var d = r && r.directions;
+    if (!d || d.length < 2) throw { code: "invalid_json" };
+    S.directions = d.slice(0, 2).map(function (x) { return { title: String(x.title || "Direction"), summary: String(x.summary || "") }; });
+    S.dir = 0; S.dirMore = !!more; S.showDirPanel = false; go("direction");
+  }, function (e) {
+    if (e && e.code === "cancelled") { go(more ? "direction" : "setup"); return; }
+    if (isHardOff(e)) { S.demo = true; S.directions = demoDirections(a, more); S.dir = 0; S.dirMore = !!more; S.showDirPanel = false; go("direction"); return; }
+    S.error = errCopy(e); S.retry = function () { genDirections(more); }; render();
+  });
+}
+function genPost() {
+  S.genMsg = "Writing the post in Mike's voice, section by section";
+  go("generating");
+  var L = LENGTHS[S.length], keys = L.keys, d = S.directions[S.dir];
+  var prompt = PERSONA + "\n\nTASK: Write one LinkedIn post as Mike.\n" + brief() + "\nPost type: " + L.label + " (" + L.desc + "). " + L.like + "." +
+    "\nDirection: " + d.title + ". " + d.summary +
+    "\nLength: " + L.min + " to " + L.max + " words in total. Stay inside this range." +
+    "\nWrite these sections in this order, each one short paragraph:\n" +
+    keys.map(function (k) { return "- " + k + " (" + SECTION_NAMES[k] + "): " + SECTION_GUIDE[k]; }).join("\n") +
+    (S.link ? "\nA link will be added after the post automatically; do not write the link yourself." : "") +
+    "\nAlso suggest 1 or 2 hashtags relevant to the programme or topic (the reviewer decides whether to use them)." +
+    '\nFor each section, name the source it relies on: one of: ' + SRC_LABELS.map(function (x) { return '"' + x + '"'; }).join(", ") + '.' +
+    '\nReply with only JSON: {"sections":[{"key":"' + keys[0] + '","text":"...","source":"..."}],"hashtags":["#..."]} with one object per section in order.';
+  ask(prompt, {}).then(function (r) {
+    var arr = r && r.sections;
+    if (!arr || !arr.length) throw { code: "invalid_json" };
+    S.tags = (r.hashtags || []).map(String).filter(function (h) { return /^#\w+$/.test(h); }).slice(0, 2);
+    buildSections(function (k, i) {
+      var m = arr.filter(function (x) { return x.key === k; })[0] || arr[i] || {};
+      return { text: String(m.text || "").trim() || demoSection(k, ctxObj()).text, source: String(m.source || "Voice profile") };
+    });
+  }, function (e) {
+    if (e && e.code === "cancelled") { go("direction"); return; }
+    if (isHardOff(e)) { S.demo = true; S.tags = S.account ? [S.account.tag] : []; buildSections(function (k) { return demoSection(k, ctxObj()); }); return; }
+    S.error = errCopy(e); S.retry = genPost; render();
+  });
+}
+function buildSections(fn) {
+  S.sections = LENGTHS[S.length].keys.map(function (k, i) { return { key: k, name: SECTION_NAMES[k], versions: [fn(k, i)], v: 0, approved: false }; });
+  S.current = 0; S.editing = -1; S.regenOpen = -1; S.warnLater = false; S.useTags = false; go("build");
+}
+function regenSection(i) {
+  var s = S.sections[i], reasons = S.regenReasons.slice(), note = S.regenNote;
+  s.loading = true; S.regenOpen = -1; S.error = ""; render();
+  var done = function (v) { s.loading = false; s.versions.push(v); s.v = s.versions.length - 1; S.regenReasons = []; S.regenNote = ""; render(); };
+  var others = S.sections.map(function (x, j) { return (j === i ? ">> " : "") + x.name + ": " + cur(x).text; }).join("\n");
+  var prompt = PERSONA + "\n\nTASK: Rewrite ONE section of Mike's LinkedIn post.\n" + brief() + "\nDirection: " + S.directions[S.dir].title +
+    "\nThe full post so far (the section to rewrite is marked >>):\n" + others +
+    "\n\nRewrite only the section '" + s.name + "' (" + SECTION_GUIDE[s.key] + "). Reviewer feedback: " + (reasons.join(", ") || "make it better") + (note ? ". Note: " + note : "") +
+    ". Keep it consistent with the other sections; the whole post must stay within " + rangeText(S.length) + "." +
+    '\nReply with only JSON: {"text":"...","source":"one of: ' + SRC_LABELS.join("; ") + '"}';
+  ask(prompt, { cache: false }).then(function (r) {
+    if (!r || !r.text) throw { code: "invalid_json" };
+    done({ text: String(r.text).trim(), source: String(r.source || cur(s).source) });
+  }, function (e) {
+    if (e && e.code === "cancelled") { s.loading = false; render(); return; }
+    if (isHardOff(e)) { var alt = demoSection(s.key, ctxObj(), s.versions.length % 2 === 1); done({ text: alt.text + (s.versions.length > 1 ? "" : ""), source: alt.source }); return; }
+    s.loading = false; S.error = errCopy(e); render();
+  });
+}
+function runChecks() {
+  var flags = [], hasBad = false;
+  S.sections.forEach(function (s, i) {
+    var t = cur(s).text, m = t.match(/\[[^\]]+\]/g);
+    if (m) m.forEach(function (p) { flags.push({ title: "Placeholder in " + s.name, detail: p + " is waiting for HP to confirm.", sec: i }); });
+    var low = t.toLowerCase();
+    OFF_LIMITS.forEach(function (w) { if (new RegExp("\\b" + w + "\\b").test(low)) { hasBad = true; flags.push({ title: "Off-limits topic in " + s.name, detail: 'Mentions "' + w + '". Mike\'s persona does not write about this.', sec: i, kind: "danger" }); } });
+  });
+  if (!hasBad) flags.push({ ok: true, title: "No off-limits topics found", detail: "Checked for pricing, memory supply, results and forecasts, and competitors." });
+  var wc = words(assembled()), L = LENGTHS[S.length];
+  if (wc < L.min * 0.85 || wc > L.max * 1.15) flags.push({ title: "Length is outside the range for this post type", detail: wc + " words; Mike's " + L.label.toLowerCase() + " posts run " + rangeText(S.length) + ". Fix to shorten or lengthen a section.", sec: null });
+  else flags.push({ ok: true, title: "Length fits this post type", detail: wc + " words; his posts of this type run " + rangeText(S.length) + "." });
+  S.flags = flags;
+}
+
+/* ---------- Events ---------- */
+document.addEventListener("submit", function (e) {
+  var f = e.target.getAttribute("data-f");
+  if (!f) return;
+  e.preventDefault();
+  if (f === "login") go("home");
+  if (f === "note") { var v = document.getElementById("noteIn").value.trim(); if (!v) { document.getElementById("noteIn").focus(); return; } S.account = null; S.note = v; S.fromNew = false; S.editNote = false; S.length = "pov"; S.link = ""; go("setup"); }
+});
+document.addEventListener("input", function (e) {
+  var id = e.target.id;
+  if (id === "dirNote") S.dirNote = e.target.value;
+  if (id === "regenNote") S.regenNote = e.target.value;
+  if (id === "noteNew" || id === "noteEdit") S.note = e.target.value;
+  if (id === "linkIn") S.link = e.target.value.trim();
+});
+document.addEventListener("change", function (e) {
+  if (e.target.id === "tagToggle") { S.useTags = e.target.checked; render(); return; }
+  if (e.target.id === "accSel") { var id = e.target.value; S.account = ACCOUNTS.filter(function (a) { return a.id === id; })[0] || null; S.length = S.account ? S.account.suggest : "pov"; render(); }
+});
+document.addEventListener("click", function (e) {
+  var el = e.target.closest("[data-a]");
+  if (!el) return;
+  var a = el.getAttribute("data-a"), i = +el.getAttribute("data-i");
+  switch (a) {
+    case "theme": var nt = isDark() ? "light" : "dark"; document.documentElement.setAttribute("data-theme", nt); store("mp-theme", nt); render(); break;
+    case "logout": S.drawer = null; go("login"); break;
+    case "home": if (S.view !== "login") { if (ctl) ctl.abort(); go("home"); } break;
+    case "drawer": S.drawer = el.getAttribute("data-d"); renderLayer(); break;
+    case "closedrawer": S.drawer = null; renderLayer(); break;
+    case "new": S.account = null; S.note = ""; S.fromNew = true; S.length = "pov"; S.link = ""; go("setup"); break;
+    case "acc": S.account = ACCOUNTS.filter(function (x) { return x.id === el.getAttribute("data-id"); })[0]; S.note = ""; S.fromNew = false; S.length = S.account.suggest; S.link = ""; go("setup"); break;
+    case "editnote": S.editNote = !S.editNote; render(); break;
+    case "len": S.length = el.getAttribute("data-k"); render(); break;
+    case "continue":
+      if (!S.account && !S.note.trim()) { toast("Pick an account or add a note first"); break; }
+      S.dirReason = []; S.dirNote = ""; genDirections(false); break;
+    case "stop": if (ctl) ctl.abort(); break;
+    case "retry": S.error = ""; if (S.retry) S.retry(); break;
+    case "usedemo": S.demo = true; S.error = ""; if (S.retry) S.retry(); break;
+    case "pickdir": S.dir = i; render(); break;
+    case "opendirpanel": S.showDirPanel = true; render(); break;
+    case "closedirpanel": S.showDirPanel = false; render(); break;
+    case "dirreason": var r = el.getAttribute("data-r"), k = S.dirReason.indexOf(r); if (k > -1) S.dirReason.splice(k, 1); else S.dirReason.push(r); render(); break;
+    case "moredirs": S.firstDirs = S.firstDirs || S.directions; genDirections(true); break;
+    case "backdirs": if (S.firstDirs) { S.directions = S.firstDirs; S.dirMore = false; S.dir = 0; render(); } break;
+    case "usedir": if (!S.dirMore) S.firstDirs = S.directions; genPost(); break;
+    case "redirect": go("direction"); break;
+    case "approve": S.sections[i].approved = true; S.regenOpen = -1; S.editing = -1; S.current = S.sections.findIndex(function (s) { return !s.approved; }); if (S.current < 0) S.current = S.sections.length; render(); break;
+    case "edit": S.editing = i; S.regenOpen = -1; render(); var ta = document.getElementById("edit-" + i); if (ta) ta.focus(); break;
+    case "canceledit": S.editing = -1; render(); break;
+    case "saveedit":
+      var t = document.getElementById("edit-" + i).value.trim(); if (!t) { toast("A section can't be empty"); break; }
+      var s = S.sections[i]; s.versions.push({ text: t, source: cur(s).source + " (edited)" }); s.v = s.versions.length - 1;
+      if (s.approved && S.sections.slice(i + 1).some(function (x) { return x.approved; })) S.warnLater = true;
+      S.editing = -1; render(); break;
+    case "regen": S.regenOpen = i; S.regenReasons = []; S.regenNote = ""; render(); break;
+    case "closeregen": S.regenOpen = -1; render(); break;
+    case "rreason": var rr = el.getAttribute("data-r"), kk = S.regenReasons.indexOf(rr); if (kk > -1) S.regenReasons.splice(kk, 1); else S.regenReasons.push(rr); render(); break;
+    case "doregen": regenSection(i); break;
+    case "vprev": S.sections[i].v = Math.max(0, S.sections[i].v - 1); render(); break;
+    case "vnext": S.sections[i].v = Math.min(S.sections[i].versions.length - 1, S.sections[i].v + 1); render(); break;
+    case "preview": runChecks(); go("check"); break;
+    case "fix": var f = S.flags[i]; if (f.sec != null) { var sx = S.sections[f.sec]; sx.approved = false; S.current = f.sec; S.editing = f.sec; } go("build"); break;
+    case "keep": S.flags[i].keeping = true; render(); break;
+    case "cancelkeep": S.flags[i].keeping = false; render(); break;
+    case "savekeep": var why = document.getElementById("keep-" + i).value.trim(); if (!why) { toast("Add a short reason to keep it"); break; } S.flags[i].reason = why; S.flags[i].resolved = true; S.flags[i].keeping = false; render(); break;
+    case "unkeep": S.flags[i].resolved = false; render(); break;
+    case "markfinal":
+      var text = finalText(), srcs = [];
+      S.sections.forEach(function (s) { var x = (cur(s).source || "").replace(" (edited)", ""); if (x && srcs.indexOf(x) < 0) srcs.push(x); });
+      S.final = { text: text, sources: srcs, length: S.length };
+      var d = new Date();
+      history = history.filter(function (h) { return !h.example; });
+      history.unshift({ date: d.toLocaleDateString("en-GB", { day: "numeric", month: "short" }), account: S.account ? S.account.short : "From a note", color: S.account ? S.account.color : "#5B6B80", topic: topicOf(), text: text, length: S.length, sources: srcs });
+      history = history.slice(0, 30); store("mp-history-v2", history); go("final"); break;
+    case "copy": copyText(S.final.text); break;
+    case "backbuild": go("build"); break;
+    case "startnew": go("home"); break;
+    case "hopen": var h = history[i]; S.final = { text: h.text, sources: h.sources || [], length: h.length, fromHistory: true }; go("final"); break;
+    case "hcopy": copyText(history[i].text); break;
+  }
+});
+document.addEventListener("keydown", function (e) { if (e.key === "Escape" && S.drawer) { S.drawer = null; renderLayer(); } });
+function copyText(t) {
+  var ok = function () { toast("Copied to clipboard"); };
+  try {
+    navigator.clipboard.writeText(t).then(ok, function () { fallbackCopy(t); });
+  } catch (e) { fallbackCopy(t); }
+}
+function fallbackCopy(t) {
+  var ta = document.createElement("textarea"); ta.value = t; ta.style.position = "fixed"; ta.style.left = "-9999px"; document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); toast("Copied to clipboard"); } catch (e) { toast("Select the text and copy it"); }
+  document.body.removeChild(ta);
+}
+window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").addEventListener && window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+
+render();
+})();
+</script>
+
+</body></html>

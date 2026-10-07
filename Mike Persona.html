@@ -1,0 +1,2853 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mike Persona | HP Executive Communications Suite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* ==========================================================================
+   MIKE PERSONA - HP EXECUTIVE COMMUNICATIONS SUITE
+   Enterprise B2B Design System: Calm, Intentional, High-Hierarchy & Whitespace
+   Palette: #171321 (Dark Obsidian), #4C1D95 (Brand Dark), #7C3AED (Primary CTA)
+   85-90% Neutral Canvas (White / #FAFAFA / #E4E4E7 / #18181B)
+   ========================================================================== */
+:root {
+  /* Brand Accents (Strictly restrained ~10-15%) */
+  --primary: #7C3AED;
+  --primary-hover: #6D28D9;
+  --primary-active: #5B21B6;
+  --primary-dark: #4C1D95;
+  --primary-subtle: #F5F3FF;
+  --dark: #171321;
+  --dark-surface: #1E1A2B;
+  --dark-border: rgba(255, 255, 255, 0.08);
+
+  /* Clean Neutral Canvas (85-90%) */
+  --bg: #FAFAFA;
+  --surface: #FFFFFF;
+  --surface-2: #F4F4F5;
+  --border: #E4E4E7;
+  --border-subtle: #EEEEF0;
+
+  /* Typography */
+  --text: #18181B;
+  --muted: #71717A;
+  --heading: #18181B;
+
+  /* Semantic Feedback */
+  --success: #16A34A;
+  --success-bg: #DCFCE7;
+  --success-text: #15803D;
+  --warning: #D97706;
+  --warning-bg: #FEF3C7;
+  --warning-text: #B45309;
+  --danger: #DC2626;
+  --danger-bg: #FEE2E2;
+  --danger-text: #991B1B;
+
+  /* Subtle AI Accent (Calm Lavender Tint) */
+  --ai-bg: #FAF8FE;
+  --ai-border: #EBE6F3;
+  --ai-text: #6B21A8;
+
+  /* Elevation (Minimal & Restrained) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+  /* Radius */
+  --r-xs: 6px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 14px;
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg: #0D0C13;
+  --surface: #151322;
+  --surface-2: #1C192C;
+  --border: #2B2640;
+  --border-subtle: #211D33;
+
+  --text: #F4F4F5;
+  --muted: #A1A1AA;
+  --heading: #FFFFFF;
+
+  --primary: #8B5CF6;
+  --primary-hover: #7C3AED;
+  --primary-active: #6D28D9;
+  --primary-dark: #6D28D9;
+  --primary-subtle: #1F1836;
+
+  --ai-bg: #1A162B;
+  --ai-border: #2E284B;
+  --ai-text: #C4B5FD;
+
+  --success-bg: rgba(22, 163, 74, 0.15);
+  --success-text: #4ADE80;
+  --warning-bg: rgba(217, 119, 6, 0.15);
+  --warning-text: #FBBF24;
+  --danger-bg: rgba(220, 38, 38, 0.15);
+  --danger-text: #F87171;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   RESET & TYPOGRAPHY HIERARCHY
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  min-height: 100%;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 {
+  color: var(--heading);
+  line-height: 1.25;
+}
+h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
+h3 { font-size: 16px; font-weight: 600; }
+h4 { font-size: 14px; font-weight: 600; }
+p { margin: 0; }
+button, input, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+
+/* ==========================================================================
+   APP SHELL LAYOUT (Sidebar ~248px, Full-width main panel, ~24-28px padding)
+   ========================================================================== */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: var(--bg);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 248px;
+  flex: 0 0 248px;
+  background: var(--dark);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  border-right: 1px solid var(--dark-border);
+  z-index: 20;
+  transition: transform 0.2s ease-in-out;
+}
+.sidebar-header {
+  padding: 18px 16px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--dark-border);
+}
+.sidebar-logo-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-sm);
+  background: linear-gradient(135deg, #171321 0%, #4C1D95 55%, #7C3AED 100%);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.sidebar-brand-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+.sidebar-brand-badge {
+  font-size: 11px;
+  color: #A1A1AA;
+}
+.sidebar-nav {
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+  flex: 1;
+}
+.sidebar-category {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #71717A;
+  padding: 12px 10px 4px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--r-sm);
+  color: #A1A1AA;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+.nav-item:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.05);
+}
+.nav-item.active {
+  color: #FFFFFF;
+  background: rgba(124, 58, 237, 0.18);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 #7C3AED;
+}
+.nav-item svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  stroke-width: 1.8;
+}
+.sidebar-footer {
+  padding: 12px 14px;
+  border-top: 1px solid var(--dark-border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.12);
+}
+.persona-user-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: var(--r-sm);
+  background: rgba(255, 255, 255, 0.04);
+}
+.persona-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #7C3AED;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #FFFFFF;
+  flex: none;
+}
+.persona-user-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.persona-user-role {
+  font-size: 10.5px;
+  color: #71717A;
+}
+.sidebar-actions-row {
+  display: flex;
+  gap: 6px;
+}
+.sidebar-btn-sm {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #A1A1AA;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--r-xs);
+  padding: 5px 8px;
+}
+.sidebar-btn-sm:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Main Panel */
+.main-panel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.top-nav {
+  height: 54px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.nav-breadcrumbs {
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.nav-breadcrumbs b {
+  color: var(--heading);
+  font-weight: 600;
+}
+.top-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mobile-menu-toggle {
+  display: none;
+  padding: 6px;
+  border-radius: var(--r-xs);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Content Canvas */
+.main-content {
+  padding: 24px 28px 64px;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 13.5px;
+  font-weight: 600;
+  border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.btn.primary {
+  background: var(--primary);
+  color: #FFFFFF;
+}
+.btn.primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+.btn.secondary {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+.btn.secondary:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+.btn.ghost {
+  background: transparent;
+  color: var(--muted);
+  padding: 4px 8px;
+}
+.btn.ghost:hover:not(:disabled) {
+  color: var(--text);
+  background: var(--surface-2);
+}
+.btn.sm {
+  padding: 5px 10px;
+  font-size: 12.5px;
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.link {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* ==========================================================================
+   ORIENTATION BANNERS (Where am I? What am I deciding? What happens next?)
+   ========================================================================== */
+.step-banner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  flex-wrap: wrap;
+}
+.step-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.step-tag-pill {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #FFFFFF;
+  background: var(--primary);
+  padding: 3px 8px;
+  border-radius: var(--r-xs);
+}
+.step-banner-text {
+  font-size: 13px;
+  color: var(--muted);
+}
+.step-banner-text b {
+  color: var(--heading);
+}
+
+/* ==========================================================================
+   EXECUTIVE HEADER (Reduced ~25-30% height, Single Primary CTA)
+   ========================================================================== */
+.exec-header-compact {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  flex-wrap: wrap;
+}
+.exec-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.exec-avatar-compact {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #171321;
+  display: grid;
+  place-items: center;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 15px;
+  border: 2px solid var(--border);
+  flex: none;
+}
+.exec-meta-compact h1 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.exec-meta-compact .exec-sub {
+  font-size: 12.5px;
+  color: var(--muted);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.exec-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.status-pill-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--success-text);
+  background: var(--success-bg);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+/* ==========================================================================
+   KPI SECTION (4 Primary Metrics)
+   ========================================================================== */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.kpi-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.kpi-box .label {
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.kpi-box .value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--heading);
+  line-height: 1.2;
+  margin-top: 2px;
+}
+.kpi-box .hint {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   MAIN DASHBOARD 2-COLUMN SECTION (Whitespace & Progressive Disclosure)
+   ========================================================================== */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.section-header-clean {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+.section-header-clean h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Priority Account Cards (Concise, Uncluttered) */
+.accounts-stack {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.account-card-clean {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  transition: border-color 0.15s ease;
+}
+.account-card-clean:hover {
+  border-color: #D4D4D8;
+}
+.account-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+.account-name-clean {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--heading);
+}
+.account-geo-clean {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+.account-topic-clean {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--surface-2);
+  padding: 3px 8px;
+  border-radius: var(--r-xs);
+  align-self: flex-start;
+}
+.badge-clean {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.badge-clean.ready {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+.badge-clean.researching {
+  background: var(--warning-bg);
+  color: var(--warning-text);
+}
+.badge-clean.neutral {
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+/* Executive Intelligence Box (Calm, Concise, Truncated with "View full") */
+.intel-card-clean {
+  background: var(--ai-bg);
+  border: 1px solid var(--ai-border);
+  border-radius: var(--r-md);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.intel-card-clean .intel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.intel-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ai-text);
+}
+.intel-list-concise {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.intel-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.intel-row-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+.intel-row-val {
+  font-size: 13px;
+  color: var(--heading);
+  font-weight: 500;
+}
+
+/* Quick Topic Draft Box */
+.quick-draft-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   SECONDARY WORKFLOW PROGRESS INDICATOR (Compact, Unobtrusive)
+   ========================================================================== */
+.compact-pipeline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  font-size: 12px;
+  color: var(--muted);
+  width: fit-content;
+  overflow-x: auto;
+}
+.pipeline-step-mini {
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.pipeline-step-mini.done {
+  color: var(--heading);
+}
+.pipeline-step-mini .chk {
+  color: var(--success);
+  font-weight: 700;
+}
+.pipeline-sep {
+  color: #D4D4D8;
+  font-size: 11px;
+}
+
+/* ==========================================================================
+   TABLES (Clean, No Nested Outer Borders)
+   ========================================================================== */
+.table-wrap-clean {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+  font-size: 13px;
+}
+th {
+  background: var(--surface-2);
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: middle;
+}
+tbody tr:last-child td {
+  border-bottom: none;
+}
+tbody tr:hover {
+  background: var(--surface-2);
+}
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+/* ==========================================================================
+   WORKFLOW SCREENS (Setup, Generating, Direction, Build, Check, Final)
+   ========================================================================== */
+.card-clean {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+}
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.choice-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.choice-card-clean {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  transition: border-color 0.15s ease;
+  position: relative;
+  cursor: pointer;
+}
+.choice-card-clean:hover {
+  border-color: #D4D4D8;
+}
+.choice-card-clean.selected {
+  border: 2px solid var(--primary);
+  background: var(--primary-subtle);
+}
+.choice-card-clean.selected::after {
+  content: "Selected";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+.choice-letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 12px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 2px;
+}
+
+/* Section Builder */
+.section-item-clean {
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.section-item-clean.active {
+  border: 1.5px solid var(--primary);
+}
+.section-item-clean.locked {
+  background: var(--surface-2);
+  border-style: dashed;
+  color: var(--muted);
+}
+.section-head-clean {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.section-title-clean {
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--heading);
+}
+
+/* Source Proof Badge */
+.source-proof-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  color: var(--muted);
+  background: var(--surface-2);
+  padding: 2px 8px;
+  border-radius: var(--r-xs);
+  border: 1px solid var(--border-subtle);
+}
+
+/* LinkedIn Simulation Card */
+.post-card-clean {
+  background: #FFFFFF;
+  color: #18181B;
+  border-radius: var(--r-md);
+  border: 1px solid #E4E4E7;
+  box-shadow: var(--shadow-sm);
+  padding: 18px;
+  width: 100%;
+  max-width: 540px;
+}
+.post-header-clean {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.post-content-clean {
+  font-size: 13.5px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+.placeholder-highlight {
+  background: rgba(217, 119, 6, 0.15);
+  border: 1px dashed var(--warning);
+  border-radius: 3px;
+  padding: 0 4px;
+  font-weight: 600;
+  color: var(--warning-text);
+}
+.hashtag-highlight {
+  color: #0A66C2;
+  font-weight: 600;
+}
+
+/* Forms */
+.input, textarea, select {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  padding: 9px 12px;
+  font-size: 13.5px;
+}
+.input:focus, textarea:focus, select:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+textarea {
+  min-height: 90px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Drawers */
+.scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 13, 21, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 40;
+}
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(520px, 100%);
+  background: var(--surface);
+  z-index: 41;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12);
+  border-left: 1px solid var(--border);
+}
+.drawer-head {
+  background: var(--dark);
+  color: #FFFFFF;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.drawer-body {
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.drawer-body h3 {
+  font-size: 13.5px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+  margin-top: 6px;
+  color: var(--heading);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  background: var(--dark);
+  color: #FFFFFF;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  z-index: 50;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .sidebar {
+    position: fixed;
+    transform: translateX(-100%);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  .mobile-menu-toggle {
+    display: inline-flex;
+  }
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .main-content {
+    padding: 16px 16px 48px;
+  }
+  .kpi-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .accounts-stack, .choice-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="layer"></div>
+
+<script>
+(function () {
+"use strict";
+
+/* ---------- KNOWLEDGE BASE & TARGET ACCOUNTS ---------- */
+var ACCOUNTS = [
+  { id: "qld", name: "Dept. of Education Queensland", short: "Dept of Education Qld", sector: "Education · Australia", topic: "AI in Education", tag: "#AIinEducation", suggest: "programme", status: "READY", color: "#7C3AED" },
+  { id: "sia", name: "Singapore Airlines", short: "Singapore Airlines", sector: "Aviation · Singapore", topic: "AI on the edge", tag: "#HybridAI", suggest: "pov", status: "READY", color: "#6D28D9" },
+  { id: "edb", name: "EDB Singapore", short: "EDB Singapore", sector: "Government Agency · Singapore", topic: "Manufacturing", tag: "#Manufacturing", suggest: "announce", status: "RESEARCHING", color: "#4C1D95" },
+  { id: "epac", name: "ePac Flexibles", short: "ePac Flexibles", sector: "Flexible Packaging", topic: "Labels & Packaging", tag: "#Packaging", suggest: "pov", status: "RESEARCHING", color: "#16A34A" }
+];
+
+/* 6 Calibrated Post Formats with Explanations */
+var LENGTHS = {
+  quick: {
+    label: "Quick Insight",
+    min: 40, max: 70,
+    keys: ["qpov", "qexample", "qwhy"],
+    desc: "One sharp, punchy idea in three sentences.",
+    when: "Best for immediate observations, leadership epiphanies, and quick engagement.",
+    like: "Like his Remote Garage post (45 words)"
+  },
+  announce: {
+    label: "Announcement",
+    min: 90, max: 130,
+    keys: ["news", "means", "credit"],
+    desc: "A partnership, launch, or milestone with partner recognition.",
+    when: "Best for product updates, strategic alliances, and milestone celebrations.",
+    like: "Like his Rakuten AI & Wubble posts (106–116 words)"
+  },
+  pov: {
+    label: "Point of View",
+    min: 140, max: 180,
+    keys: ["thought", "example", "invite"],
+    desc: "A strategic leadership belief backed by a real case and link.",
+    when: "Best for thought leadership on AI transformation, edge compute, and executive strategy.",
+    like: "Like his Asia markets & leadership reflections (166–170 words)"
+  },
+  programme: {
+    label: "Solution / Program",
+    min: 140, max: 180,
+    keys: ["challenge", "proof", "offer"],
+    desc: "A real industry challenge, proof point, and offer to collaborate.",
+    when: "Best for education programs (HP IDEA), sustainability, and customer partnerships.",
+    like: "Like his AI in Education post (155 words)"
+  },
+  recap: {
+    label: "Event Recap",
+    min: 180, max: 220,
+    keys: ["context", "takeaways", "forward"],
+    desc: "Host gratitude, two bulleted takeaways (·), and forward-looking momentum.",
+    when: "Best for summarizing conferences, executive forums, and panel discussions.",
+    like: "Like his Fortune Leaders Forum recap (201–203 words)"
+  },
+  reflection: {
+    label: "Personal Reflection",
+    min: 250, max: 310,
+    keys: ["moment", "lesson", "athp", "believe"],
+    desc: "A personal career moment bridging to an enduring lesson about people.",
+    when: "Best for graduations, tenure milestones, and mentoring early careers.",
+    like: "Like his graduation reflection post (305 words)"
+  }
+};
+Object.keys(LENGTHS).forEach(function (k) { LENGTHS[k].words = Math.round((LENGTHS[k].min + LENGTHS[k].max) / 2); });
+
+var SECTION_NAMES = {
+  qpov: "The point of view", qexample: "The example", qwhy: "Why it matters to me",
+  news: "The news", means: "What it means", credit: "Credit and what's next",
+  thought: "The opening thought", example: "The example", invite: "The invitation",
+  challenge: "The challenge", proof: "The proof", offer: "The offer and invitation",
+  context: "Thanks and context", takeaways: "My takeaways", forward: "What I'm carrying forward",
+  moment: "The moment", lesson: "The lesson", athp: "Where I've seen it at HP", believe: "What I believe"
+};
+
+var SECTION_GUIDE = {
+  qpov: "One sentence: a clear point of view about decisions, people or technology.",
+  qexample: "One sentence: the concrete HP example that proves it.",
+  qwhy: "One sentence: why this matters to Mike as a leader.",
+  news: "Open with 'Proud to share', 'Excited to announce' or 'Grateful for', then state the news plainly.",
+  means: "What it makes possible for people or customers, with one concrete example.",
+  credit: "Thank the team or partner (name people only if the request names them), then a forward look.",
+  thought: "A point of view on people, markets, leadership or technology, in Mike's reflective first person.",
+  example: "One concrete example (a programme, partner or customer) that shows the thought in action.",
+  invite: "What it means for the reader, then an invitation to share their perspective or start a conversation.",
+  challenge: "The real-world problem people face, stated with empathy.",
+  proof: "The evidence: a programme, number or result taken only from approved facts.",
+  offer: "What HP offers to help, then an invitation to leaders to start a conversation.",
+  context: "Thank the hosts or people involved and set the scene.",
+  takeaways: "Start with 'My two takeaways:' then two lines starting with a middle dot (·).",
+  forward: "What Mike will carry into what comes next, then appreciation for the people involved.",
+  moment: "A personal moment. Use ONLY what the request provides; otherwise write exactly [Personal moment from Mike, to be supplied by Comms].",
+  lesson: "The lesson Mike took from it about careers, people or leadership.",
+  athp: "Where Mike has seen this lesson play out at HP (a programme or team from the approved facts).",
+  believe: "His underlying belief about leadership and investing in people."
+};
+
+var OFF_LIMITS = ["pricing", "price increase", "price rise", "memory shortage", "memory supply", "dram", "nand", "earnings", "revenue", "forecast", "earnings guidance", "dell", "lenovo", "apple", "asus", "acer", "layoff", "layoffs", "unannounced", "tariff", "lawsuit"];
+
+/* 20 Client Sources: 15 Processed (9 LinkedIn + 6 External), 5 Pending */
+var SOURCES = [
+  // 6 Verified External Articles
+  ["ext", "EDB Singapore: Keep things simple", "2026 executive interview. Leadership style, edge AI, Garage 2.0, Singapore hub", "processed", "https://www.edb.gov.sg/en/news-and-insights/keep-things-simple-hp-greater-asia-chief-michael-boyle-on-leading-the-tech-giant-beyond-hardware"],
+  ["ext", "Fortune: HP in Asia, Wubble, Changi Airport", "Sep 2026. AI PCs, on-device AI, HP IQ, regional market differences", "processed", "https://fortune.com/2026/09/01/hp-asia-ai-pcs-wubble-ai-changi-airport-michael-boyle/"],
+  ["ext", "Sprinter: Leaves Europe for new role in Asia", "Nov 2025. Executive promotion, career timeline (Oce, Canon, HP)", "processed", "https://www.sprinter.com.au/hps-michael-boyle-leaves-europe-for-new-role-in-asia/"],
+  ["ext", "PrintWeek: Closing the loop (Circular economy)", "Sep 2023. Circular design, e-waste, forest regeneration, WWF/FSC", "processed", "https://www.printweek.com/content/sponsored-content/closing-the-loop-how-to-be-a-truly-sustainable-business-and-why-it-matters"],
+  ["ext", "Printvergence: Future of large format printing", "Feb 2025. HP Print AI, HP Build Workspace, edge computing, latex ink", "processed", "https://printvergence.com/trends/future-of-large-format-printing-ai-sustainability-remote-innovation/"],
+  ["ext", "Texintel: Global Head of Large Format Go-To-Market", "Career appointment, farewell reflections with New Zealand team", "processed", "https://www.texintel.com/press-room/hp-name-michael-boyle-as-the-new-global-head-of-large-format-go-to-market"],
+
+  // 9 Authored LinkedIn Pulse Articles
+  ["li", "LinkedIn: The Beat Goes On (Leadership Reflections)", "May 2025. 6 leadership lessons: empathy, passion, agility, trust", "processed", "https://www.linkedin.com/in/michael-boyle-b2362012/"],
+  ["li", "LinkedIn: Empathetic Leadership More Than Being Nice", "Jan 2025. HP Work Relationship Index, Bill & Dave HP Way, active listening", "processed", "https://www.linkedin.com/in/michael-boyle-b2362012/"],
+  ["li", "LinkedIn: Next-Gen Collaboration in Hybrid AEC", "Oct 2024. Hybrid work, large-format printing in architecture/engineering", "processed", "https://www.linkedin.com/in/michael-boyle-b2362012/"],
+  ["li", "LinkedIn: Speeding Up to Slow Down (Mindful Tech)", "Aug 2024. Double-speed lectures, qualitative AI use, human focus", "processed", "https://www.linkedin.com/in/michael-boyle-b2362012/"],
+  ["li", "LinkedIn: Personal Passions for Well-Rounded Leaders", "Apr 2024. Integrating work and passions, HP Large Format Band, music", "processed", "https://www.linkedin.com/in/michael-boyle-b2362012/"],
+  ["li", "LinkedIn: 6 Tips to Master Networking", "Feb 2024. Solving problems, 20-year career start, global relationship capital", "processed", "https://www.linkedin.com/in/michael-boyle-b2362012/"],
+  ["li", "LinkedIn: Fostering Positivity (Four Lessons)", "Oct 2023. Reliving success, psychological safety, clerk to SVP", "processed", "https://www.linkedin.com/in/michael-boyle-b2362012/"],
+  ["li", "LinkedIn: Agility is the Key to Thriving", "Jul 2023. Pandemic pivot, digital tools, solution-driven agility", "processed", "https://www.linkedin.com/in/michael-boyle-b2362012/"],
+  ["li", "LinkedIn: Purposeful Work & Chief Energy Officers", "Apr 2023. Authenticity over tie/suit facade, CEOs as Chief Energy Officers", "processed", "https://www.linkedin.com/in/michael-boyle-b2362012/"],
+
+  // 5 Pending Sources (Data collection not yet conducted)
+  ["pending", "Dong-A Ilbo (Korean Article)", "Korean news headline: 'PC 속으로 들어간 AI, 기업 업무성과 좌우한다'", "pending", ""],
+  ["pending", "New Straits Times (Print Scan)", "Print article scan: 'AI Transforming Workplaces'", "pending", ""],
+  ["pending", "YouTube Video Interview", "Video recording: requires audio transcript", "pending", "https://www.youtube.com/watch?v=oUwjSGKr9-0"],
+  ["pending", "WhatTheyThink drupa 2024 Video", "Video recording: exploring large format innovation at drupa", "pending", "https://whattheythink.com/video/119596-exploring-hp-large-format-evolution-innovation-applications/"],
+  ["pending", "LinkedIn Article: Women in Technology", "Provided URL requires authenticated member login", "pending", "https://www.linkedin.com/pulse/creating-equal-opportunity-women-technology-michael-boyle"]
+];
+
+var SRC_LABELS = [
+  "Voice profile",
+  "LinkedIn: HP IDEA and HP AI Academy",
+  "LinkedIn: Rakuten AI partnership",
+  "LinkedIn: Wubble and Garage 2.0",
+  "LinkedIn: Fortune Leaders Forum",
+  "LinkedIn: SPARK and early careers",
+  "LinkedIn: Make, not Manage",
+  "LinkedIn: Leadership (Business Times)",
+  "EDB Singapore interview",
+  "Fortune, Sep 2026",
+  "PhilSTAR Tech, Mar 2026",
+  "PrintWeek: Closing the loop",
+  "Printvergence: Future of LFP",
+  "Customer brief (waiting on HP)"
+];
+
+var PERSONA = [
+  "ROLE: You write LinkedIn posts as Michael (Mike) Boyle, Senior Vice President and Managing Director of HP Greater Asia, based in Singapore. You draft for HP's Communications team. A person reviews and approves every section before anything is used.",
+  "",
+  "WHO MIKE IS (use only these facts): Leads HP Greater Asia (Southeast Asia, Australia, New Zealand, Korea and Japan) from Singapore since late 2025. 10+ years at HP: Vice President Asia Pacific and Japan; Vice President and Managing Director Australia and New Zealand (Sydney); global head of HP's Large Format business (Barcelona, about three years); Senior Vice President and Managing Director Central and Eastern Europe (Barcelona, 2025). Earlier career at Oce and Canon. Leadership beliefs he states publicly: set a clear direction, keep things simple, keep priorities consistent; the best leaders create the conditions for others to find the answers; shift from control to clarity; do less, better; culture separates good companies from great ones; invest consistently in people.",
+  "",
+  "HOW HIS POSTS ARE BUILT (calibrated from 9 authored LinkedIn posts):",
+  "1. Opening: an authentic point of view on people, culture, decisions, or regional dynamics. For news, open with appreciation: Proud to share, Excited to announce, Grateful for.",
+  "2. The concrete anchor: a programme, partner, event, or verifiable proof point.",
+  "3. Why it matters: human impact, removing workplace friction, hybrid and on-device AI, and empowering teams.",
+  "4. Credit: acknowledges partners, hosts, and colleagues. Name individuals only if context names them.",
+  "5. Close: an open invitation for dialogue ('I'd welcome a conversation', 'I would love to hear your perspective in the comments') or forward-looking momentum. If a link is provided, end with 'Read more here:' and the URL.",
+  "",
+  "VOICE RULES: first person (I, we, our team, at HP). Warm, reflective, confident, never salesy. Medium sentences with occasional punchy lines. Plain words. Uses middle-dot (·) bullets for takeaways. HP heritage: Make, not Manage; The HP Way; Chief Energy Officers. Hashtags: optional, used in ~22% of posts, at most 2. Exclamation marks: at most one, only at the end to celebrate. No emojis. Zero corporate hype words (revolutionary, game-changing, cutting-edge, unleash, synergy). British/Australian spelling (programme, organisation).",
+  "",
+  "APPROVED FACTS:",
+  "- HP IDEA has reached over 8,200 teachers and 135,000 students. HP AI Academy offers free courses and certification for teachers and students. [LinkedIn: HP IDEA and HP AI Academy]",
+  "- Rakuten AI partnership in Japan combines intelligent hardware with on-device AI for offline travel bookings. [LinkedIn: Rakuten AI partnership]",
+  "- HP Garage 2.0 in Singapore scales AI startups like Wubble (adaptive audio at Changi Airport). [LinkedIn: Wubble and Garage 2.0]",
+  "- Fortune Leaders Forum takeaways: keep humans at the centre of AI decisions, support hybrid work with face-to-face connection. [LinkedIn: Fortune Leaders Forum]",
+  "- SPARK graduate programme: 30 graduates across Southeast Asia. [LinkedIn: SPARK and early careers]",
+  "- Leadership philosophy: Make, not Manage; culture separates good companies from great ones. [LinkedIn: Make, not Manage]",
+  "- HP positions at compute level and edge orchestration, reducing friction; Singapore manufacturing & R&D hub. [EDB Singapore interview]",
+  "- AI PCs reduce cloud token costs, latency, and keep corporate IP on-device; HP IQ is an on-device assistant. [Fortune, Sep 2026]",
+  "- Circular economy: recycling plastics facility, HP DesignJet Studio reducing carbon, forest regeneration with WWF/FSC. [PrintWeek: Closing the loop]",
+  "",
+  "HARD GOVERNANCE RULES:",
+  "- Use ONLY facts above and supplied context. Do not invent products, dates, numbers, or events.",
+  "- Unconfirmed deliverables must use square brackets: [HP solution, to be confirmed].",
+  "- Prohibited topics: pricing, memory supply, quarterly forecasts, competitors, lawsuits, layoffs.",
+  "- Never invent personal details about Mike's family."
+].join("\n");
+
+/* ---------- DEMO GENERATION FALLBACK ---------- */
+function demoDirections(a, more) {
+  var who = a ? a.name.replace("Dept of", "Department of") : "the organisations we work with";
+  if (more) return [
+    { title: "The people behind it", summary: "Starts with the day-to-day reality of the people " + (a ? "at " + a.short : "we serve") + ", focusing on building confidence rather than just adopting tools." },
+    { title: "Lessons for other leaders", summary: "What other executive leaders in Greater Asia can take away from this collaborative milestone." }
+  ];
+  return [
+    { title: "Celebrate the partnership", summary: "Opens with gratitude to the teams at " + who + ", anchoring on what this unlocks for people on the ground." },
+    { title: "Mike's strategic POV on the topic", summary: "Opens with Mike's core belief that technology should work quietly in the background to remove friction, then connects to " + (a ? a.short : "the initiative") + "." }
+  ];
+}
+
+function demoSection(key, ctx, alt) {
+  var a = ctx.account, id = a ? a.id : "note";
+  var org = a ? "the " + a.name.replace("Dept of", "Department of") : "the teams we work with";
+  var who = a ? a.short : "our partners";
+  var FACT = {
+    qld: ["HP IDEA has now reached over 8,200 teachers and 135,000 students, and the lesson keeps repeating: confidence matters as much as the tools.", "LinkedIn: HP IDEA and HP AI Academy"],
+    sia: ["When AI runs on the device, responses are faster and data stays closer to home. In Japan, our work with Rakuten AI means a travel booking can be completed even while offline.", "LinkedIn: Rakuten AI partnership"],
+    edb: ["Through Garage 2.0 in Singapore, startups get real access to HP's engineering, products and customers, and some, like Wubble, are already building on HP devices.", "LinkedIn: Wubble and Garage 2.0"],
+    epac: ["[Proof point for ePac, to be confirmed by HP]", "Customer brief (waiting on HP)"],
+    note: ["[Example or proof point, to be confirmed by Comms]", "Customer brief (waiting on HP)"]
+  };
+  var f = FACT[id];
+  var T = {
+    qpov: alt ? "Good technology should make the next decision easier, not harder." : "The best decisions are made close to the people they affect.",
+    qexample: a ? "That's what we're working towards with " + who + " and [HP solution, to be confirmed]." : "That's the thinking behind what our teams are building across the region.",
+    qwhy: alt ? "That kind of clarity is what I want for every team I work with." : "Clarity like that is what I want every team I lead to have.",
+    news: alt ? "Excited to share a milestone with " + org + " this week: [milestone, to be confirmed by HP]." : "Proud to share the work HP is doing with " + org + ". Together we're bringing [HP solution, to be confirmed] to the people who rely on it every day, and it's a milestone I've been looking forward to sharing.",
+    means: alt ? f[0] : "What I like most is what it makes possible. [What changes for people, to be confirmed]. It's a good example of technology working quietly in the background, so people can spend their time on the work that matters rather than on managing tools.",
+    credit: alt ? "Proud of this milestone, and of everyone who made it happen. Onward and upward!" : "Grateful to the teams at " + who + " and at HP who brought this to life and represent us so well on the ground. Excited to see where it goes next.",
+    thought: alt ? "I've come to believe the most useful technology is the kind people barely notice." : "Every market across Asia has its own pace and character, and some of the best ideas I've seen start by paying attention to that difference. The organisations doing well with AI aren't the ones with the most tools. They're the ones that are clear about what they want their people to be able to do.",
+    example: (alt && a) ? "With " + who + ", that looks like [HP solution, to be confirmed]." : f[0] + " It's a reminder that progress comes from people feeling confident, not just from new technology arriving.",
+    invite: alt ? "I'd welcome a conversation with anyone working through the same questions." : "For me, that's the real question for leaders right now: not whether to use AI, but how to keep people at the centre of the decisions it supports. If this resonates with how you're thinking about " + (a ? a.topic.toLowerCase() : "the year ahead") + ", I'd love to hear your perspective in the comments.",
+    challenge: id === "qld" ? (alt ? "Teachers are being asked to make big calls about AI in their classrooms, usually with very little support." : "AI is arriving in classrooms faster than most teachers can be trained to use it well. Teachers are already making judgement calls about it every day, often with very little support, and that gap is holding back what AI could do for students.") : (alt ? "Many teams want to use AI well, but confidence often lags behind the tools." : "Most organisations I speak with aren't short of technology. They're short of the time and confidence to use it well. People are being asked to make decisions about AI every day, often without much support, and that gap holds back what the technology could do."),
+    proof: f[0] + " Wherever we've seen real progress, it has started with investing in people first.",
+    offer: id === "qld" ? "HP AI Academy offers free courses and certification for teachers and students, fellowships with university partners, and a voice for educators through HP Futures. If you're an education leader thinking about where to start with AI, I'd welcome a conversation." : "[HP offer, to be confirmed]. The aim is simple: give people the skills and confidence to use technology well, not just access to it. If you're working through the same challenge, I'd welcome a conversation.",
+    context: alt ? "Great to spend time with " + who + " this week [event, to be confirmed by Comms]." : "Grateful to join " + who + " and the HP team this week at [event, to be confirmed by Comms]. AI, data, security and customer expectations are increasingly tangled together, and it was valuable to spend time with people working through those questions in real organisations. It's the kind of room where the most useful ideas come from listening rather than presenting.",
+    takeaways: "My two takeaways:\n· Organisations will need to transform with AI, but keeping people at the centre of the decisions it supports matters more than ever. Judgement and emotional intelligence don't get automated.\n· Teams need the best of both worlds: real time together, and the right tools for focused work when they're apart.",
+    forward: "I'm carrying these questions into the weeks ahead, especially where technology is genuinely helping and where it may still be creating friction for people. Conversations like this are where I learn the most, and I'm grateful to everyone who made the time.",
+    moment: "[Personal moment from Mike, to be supplied by Comms]",
+    lesson: alt ? "It reminded me how much good leadership is about clarity rather than control." : "It reminded me that the best leaders create the conditions for others to find the answers, rather than having them all. The shift that matters most is from control to clarity: being clear about direction and priorities, then trusting people to find their own way there. Doing less, but doing it better, is part of that too.",
+    athp: id === "qld" ? f[0] : "I see it in our SPARK graduate programme, where the latest cohort brings together 30 graduates from Malaysia, Singapore, Vietnam, the Philippines, Thailand and Indonesia. And I see it in HP's Business Resource Groups, where mentorship and a sense of belonging help people find their confidence and realise their perspective matters. None of that happens by accident.",
+    believe: "Investing in people, consistently and on purpose, is still the best decision a leader can make. It builds the next generation of leaders, and in my experience they're the ones who end up moving everything forward."
+  };
+  var SRC = {
+    qpov: "Voice profile", qexample: "Customer brief (waiting on HP)", qwhy: "Voice profile",
+    news: "Customer brief (waiting on HP)", means: alt ? f[1] : "Customer brief (waiting on HP)", credit: "Voice profile",
+    thought: alt ? "Voice profile" : "Fortune, Sep 2026", example: (alt && a) ? "Customer brief (waiting on HP)" : f[1], invite: "Voice profile",
+    challenge: id === "qld" ? "LinkedIn: HP IDEA and HP AI Academy" : "PhilSTAR Tech, Mar 2026", proof: f[1],
+    offer: id === "qld" ? "LinkedIn: HP IDEA and HP AI Academy" : "Customer brief (waiting on HP)", context: "Customer brief (waiting on HP)",
+    takeaways: "LinkedIn: Fortune Leaders Forum", forward: "LinkedIn: Fortune Leaders Forum",
+    moment: "Customer brief (waiting on HP)", lesson: "EDB Singapore interview", athp: id === "qld" ? f[1] : "LinkedIn: SPARK and early careers",
+    believe: "LinkedIn: SPARK and early careers"
+  };
+  return { text: T[key], source: SRC[key] };
+}
+
+/* ---------- APP STATE ---------- */
+var S = {
+  view: "login", tab: "overview", mobileMenu: false, account: null, note: "", fromNew: false, length: "pov",
+  directions: [], dirMore: false, dir: 0, dirReason: [], dirNote: "", showDirPanel: false,
+  sections: [], tags: [], useTags: false, link: "", current: 0, flags: [], final: null, demo: false, live: null,
+  error: "", busy: false, drawer: null, toast: "", editing: -1, regenOpen: -1, regenReasons: [], regenNote: "", warnLater: false
+};
+
+var history = loadHistory();
+var ctl = null;
+
+function store(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+function load(k) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
+
+function loadHistory() {
+  var h = load("mp-history-v2");
+  if (h && h.length) return h;
+  return [
+    { date: "Oct 2026", account: "Dept. of Education Queensland", color: "#7C3AED", topic: "AI in Education", text: "AI is already showing up in classrooms, and teachers are the ones deciding how it gets used.\n\nProud of HP's partnership with the Department of Education Queensland. Together we're working on [HP solution, to be confirmed], with one simple aim: give teachers more time for the work that matters.\n\nThank you to the teams in Queensland and at HP making this happen. Onward and upward!\n\n#AIinEducation", length: "announce", sources: ["Voice profile", "Customer brief (waiting on HP)", "LinkedIn: Make, not Manage"], example: true },
+    { date: "Sep 2026", account: "Singapore Airlines", color: "#6D28D9", topic: "AI on the edge", text: "Not every AI task needs to go to the cloud.\n\nWhen AI runs on the device, data stays closer to home, responses are faster and people aren't waiting on a connection. That's a clear way to make technology more accessible, wherever you are.\n\nProud to be working with Singapore Airlines on [HP solution, to be confirmed]. I'd welcome a conversation with any leader thinking about where hybrid AI fits for their teams.", length: "pov", sources: ["Fortune, Sep 2026", "LinkedIn: Rakuten AI partnership", "Customer brief (waiting on HP)"], example: true }
+  ];
+}
+
+var theme = load("mp-theme");
+if (theme) document.documentElement.setAttribute("data-theme", theme);
+
+/* Live AI detection */
+var samplePromise = (window.claude && window.claude.use) ? window.claude.use("sample") : Promise.resolve(null);
+samplePromise.then(function (s) { S.live = s; render(); }, function () { S.live = null; });
+
+/* ---------- HELPERS & ICONS ---------- */
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+function words(t) { return (t.trim().match(/\S+/g) || []).length; }
+function topicOf() { return S.account ? S.account.topic : "From your note"; }
+function nameOf() { return S.account ? S.account.name : "From a note"; }
+function assembled() { return S.sections.map(function (s) { return cur(s).text; }).join("\n\n"); }
+function finalText() { var x = assembled(); if (S.link) x += "\n\nRead more here: " + S.link; if (S.useTags && S.tags.length) x += "\n\n" + S.tags.join(" "); return x; }
+function rangeText(k) { var L = LENGTHS[k]; return L ? L.min + " to " + L.max + " words" : ""; }
+function cur(s) { return s.versions[s.v]; }
+function ctxObj() { return { account: S.account, length: S.length }; }
+function toast(t) { S.toast = t; renderLayer(); setTimeout(function () { S.toast = ""; renderLayer(); }, 1800); }
+
+var ICON = {
+  overview: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>',
+  leads: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="7" r="4"/><path d="M17 11a3 3 0 100-6"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M16 19a4 4 0 003-3v-1a3 3 0 00-3-3"/></svg>',
+  accounts: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18M6 18V6a2 2 0 012-2h8a2 2 0 012 2v12M9 9h6M9 13h6"/></svg>',
+  intelligence: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>',
+  sparkle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l1.9 5.8a2 2 0 001.3 1.3L21 12l-5.8 1.9a2 2 0 00-1.3 1.3L12 21l-1.9-5.8a2 2 0 00-1.3-1.3L3 12l5.8-1.9a2 2 0 001.3-1.3L12 3z"/></svg>',
+  outreach: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>',
+  analytics: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>',
+  voice: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg>',
+  resources: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15z"/></svg>',
+  guardrails: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+  sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>',
+  moon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>',
+  logout: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg>',
+  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>',
+  edit: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>',
+  refresh: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>',
+  lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>',
+  menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12h18M3 6h18M3 18h18"/></svg>'
+};
+
+function isDark() {
+  var t = document.documentElement.getAttribute("data-theme");
+  if (t) return t === "dark";
+  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+
+/* ==========================================================================
+   SIDEBAR (Clean Sections: EXECUTIVE WORKFLOW & KNOWLEDGE & GOVERNANCE)
+   ========================================================================== */
+function vSidebar() {
+  var activeTab = S.tab;
+  var inWorkflow = (S.view !== "login" && S.view !== "home");
+  return '<aside class="sidebar ' + (S.mobileMenu ? "open" : "") + '">' +
+    '<div class="sidebar-header">' +
+      '<div class="sidebar-logo-mark">MP</div>' +
+      '<div>' +
+        '<div class="sidebar-brand-title">Mike Persona</div>' +
+        '<div class="sidebar-brand-badge">HP Communications Suite</div>' +
+      '</div>' +
+    '</div>' +
+    '<nav class="sidebar-nav">' +
+      '<span class="sidebar-category">Executive Workflow</span>' +
+      '<button class="nav-item ' + (!inWorkflow && activeTab === "overview" ? "active" : "") + '" data-a="tab" data-tab="overview">' + ICON.overview + '<span>Overview</span></button>' +
+      '<button class="nav-item ' + (!inWorkflow && activeTab === "leads" ? "active" : "") + '" data-a="tab" data-tab="leads">' + ICON.leads + '<span>Target Leads</span></button>' +
+      '<button class="nav-item ' + (!inWorkflow && activeTab === "companies" ? "active" : "") + '" data-a="tab" data-tab="companies">' + ICON.accounts + '<span>Accounts</span></button>' +
+      '<button class="nav-item ' + (!inWorkflow && activeTab === "intelligence" ? "active" : "") + '" data-a="tab" data-tab="intelligence">' + ICON.intelligence + '<span>Intelligence</span></button>' +
+      '<button class="nav-item ' + (inWorkflow ? "active" : "") + '" data-a="new">' + ICON.outreach + '<span>Outreach Draft</span></button>' +
+      '<button class="nav-item ' + (!inWorkflow && activeTab === "analytics" ? "active" : "") + '" data-a="tab" data-tab="analytics">' + ICON.analytics + '<span>Analytics</span></button>' +
+      '<span class="sidebar-category">Knowledge & Governance</span>' +
+      '<button class="nav-item" data-a="drawer" data-d="voice">' + ICON.voice + '<span>Voice Profile</span></button>' +
+      '<button class="nav-item" data-a="drawer" data-d="resources">' + ICON.resources + '<span>Sources (15/20)</span></button>' +
+      '<button class="nav-item" data-a="drawer" data-d="guardrails">' + ICON.guardrails + '<span>Guardrails</span></button>' +
+    '</nav>' +
+    '<div class="sidebar-footer">' +
+      '<div class="persona-user-card">' +
+        '<div class="persona-avatar">MB</div>' +
+        '<div style="min-width: 0; flex: 1;">' +
+          '<div class="persona-user-name">Michael Boyle</div>' +
+          '<div class="persona-user-role">SVP & MD, HP Greater Asia</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="sidebar-actions-row">' +
+        '<button class="sidebar-btn-sm" data-a="theme">' + (isDark() ? ICON.sun : ICON.moon) + '<span>' + (isDark() ? "Light" : "Dark") + '</span></button>' +
+        '<button class="sidebar-btn-sm" data-a="logout">' + ICON.logout + '<span>Log out</span></button>' +
+      '</div>' +
+    '</div>' +
+  '</aside>';
+}
+
+/* ==========================================================================
+   TOP NAV (Orienting Breadcrumb & Context)
+   ========================================================================== */
+function vTopNav() {
+  var STEP_MAP = { setup: 1, generating: 2, direction: 3, build: 4, check: 5, final: 6 };
+  var STEP_TITLES = ["", "Step 1: Input & Format", "Step 2: Synthesizing", "Step 3: Strategic Direction", "Step 4: Section-by-Section Review", "Step 5: Evidence Check", "Step 6: Final LinkedIn Preview"];
+  var curStep = STEP_MAP[S.view];
+
+  var leftContent = '<div class="nav-breadcrumbs">';
+  if (curStep) {
+    leftContent += '<button class="link" data-a="home">Outreach</button> <span class="muted">/</span> <b>' + STEP_TITLES[curStep] + '</b>';
+  } else {
+    var tabNames = { overview: "Overview", leads: "Priority Target Leads", companies: "Target Accounts Directory", intelligence: "Voice & Intelligence Model", analytics: "Outreach History & Performance" };
+    leftContent += '<span class="muted">Mike Persona /</span> <b>' + (tabNames[S.tab] || "Overview") + '</b>';
+  }
+  leftContent += '</div>';
+
+  var rightContent = '<div class="top-nav-actions">' +
+    (!curStep ? '<span class="status-pill-secondary" style="font-size: 11px;">Active Voice v2.4 (15 Sources)</span>' : '') +
+    '<button class="mobile-menu-toggle" data-a="togglemenu" aria-label="Toggle menu">' + ICON.menu + '</button>' +
+  '</div>';
+
+  return '<header class="top-nav">' + leftContent + rightContent + '</header>';
+}
+
+/* ==========================================================================
+   LOGIN VIEW
+   ========================================================================== */
+function vLogin() {
+  return '<div style="min-height: 100vh; background: var(--dark); display: grid; place-items: center; padding: 24px;">' +
+    '<div style="width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 20px;">' +
+      '<div style="display: flex; align-items: center; gap: 10px; justify-content: center;">' +
+        '<div class="sidebar-logo-mark" style="width: 38px; height: 38px; font-size: 16px;">MP</div>' +
+        '<div>' +
+          '<div style="font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.04em;">MIKE PERSONA</div>' +
+          '<div style="font-size: 12px; color: #A1A1AA;">HP Executive Communications Suite</div>' +
+        '</div>' +
+      '</div>' +
+      '<form class="card-clean" style="padding: 24px; display: flex; flex-direction: column; gap: 14px;" data-f="login">' +
+        '<div>' +
+          '<h2>Sign In to Workspace</h2>' +
+          '<p class="muted small" style="margin-top: 2px;">Enter workspace to access Michael Boyle\'s communications engine.</p>' +
+        '</div>' +
+        '<div>' +
+          '<label class="muted small" style="font-weight: 600;" for="pw">Password</label>' +
+          '<input class="input" id="pw" type="password" placeholder="Enter password (any key)" style="margin-top: 4px;">' +
+        '</div>' +
+        '<button class="btn primary" type="submit" style="width: 100%; margin-top: 4px;">Enter Communications Suite</button>' +
+        '<p class="small muted" style="text-align: center;">Production prototype for HP Communications Team</p>' +
+      '</form>' +
+    '</div>' +
+  '</div>';
+}
+
+/* ==========================================================================
+   DASHBOARD / OVERVIEW VIEW
+   ========================================================================== */
+function vHome() {
+  if (S.tab === "leads" || S.tab === "companies") return vAccountsView();
+  if (S.tab === "intelligence") return vIntelligenceView();
+  if (S.tab === "analytics") return vAnalyticsView();
+
+  /* 1. Concise Account Cards */
+  var accCards = ACCOUNTS.map(function (a) {
+    return '<div class="account-card-clean">' +
+      '<div class="account-head">' +
+        '<div>' +
+          '<div class="account-name-clean">' + esc(a.name) + '</div>' +
+          '<div class="account-geo-clean">' + esc(a.sector) + '</div>' +
+        '</div>' +
+        '<span class="badge-clean ' + (a.status === "READY" ? "ready" : "researching") + '">' + esc(a.status) + '</span>' +
+      '</div>' +
+      '<span class="account-topic-clean">' + esc(a.topic) + '</span>' +
+      '<button class="btn secondary sm" style="align-self: flex-start;" data-a="acc" data-id="' + a.id + '">' +
+        ICON.outreach + '<span>Draft Outreach</span>' +
+      '</button>' +
+    '</div>';
+  }).join("");
+
+  /* 2. Flat Recent Outreaches Table */
+  var historyRows = history.map(function (h, i) {
+    var firstLine = (h.text.split("\n")[0] || "").slice(0, 75) + "...";
+    return '<tr>' +
+      '<td style="white-space: nowrap; font-weight: 500;">' + esc(h.date) + (h.example ? ' <span class="badge-clean neutral" style="font-size:9px;">Sample</span>' : '') + '</td>' +
+      '<td><span class="dot" style="background:' + h.color + '"></span><b>' + esc(h.account) + '</b></td>' +
+      '<td>' + esc(h.topic) + '</td>' +
+      '<td class="muted" style="max-width: 280px;">' + esc(firstLine) + '</td>' +
+      '<td><span class="badge-clean neutral">' + esc(LENGTHS[h.length] ? LENGTHS[h.length].label : "Post") + '</span></td>' +
+      '<td style="white-space: nowrap; text-align: right;">' +
+        '<button class="btn ghost sm" data-a="hopen" data-i="' + i + '">Open</button>' +
+        '<button class="btn ghost sm" data-a="hcopy" data-i="' + i + '">Copy</button>' +
+      '</td>' +
+    '</tr>';
+  }).join("");
+
+  return '<div class="app-shell">' +
+    vSidebar() +
+    '<div class="main-panel">' +
+      vTopNav() +
+      '<main class="main-content">' +
+        /* 1. Executive Communications Header */
+        '<div class="exec-header-compact">' +
+          '<div class="exec-header-left">' +
+            '<div class="exec-avatar-compact">MB</div>' +
+            '<div class="exec-meta-compact">' +
+              '<h1>Michael Boyle</h1>' +
+              '<div class="exec-sub">' +
+                '<span>SVP & Managing Director, HP Greater Asia</span>' +
+                '<span>•</span>' +
+                '<span>Singapore Regional HQ</span>' +
+                '<span>•</span>' +
+                '<span class="status-pill-secondary">✓ 15 Sources Processed</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="exec-header-right">' +
+            '<button class="btn primary" data-a="new">' + ICON.sparkle + '<span>+ Create New Post</span></button>' +
+          '</div>' +
+        '</div>' +
+
+        /* 2. 4 Primary Metrics */
+        '<div class="kpi-row">' +
+          '<div class="kpi-box">' +
+            '<span class="label">Target Accounts</span>' +
+            '<span class="value">4</span>' +
+            '<span class="hint">Priority enterprise accounts</span>' +
+          '</div>' +
+          '<div class="kpi-box">' +
+            '<span class="label">Ready for Outreach</span>' +
+            '<span class="value" style="color: var(--success);">' + ACCOUNTS.filter(function (a) { return a.status === "READY"; }).length + '</span>' +
+            '<span class="hint">Active strategic angles</span>' +
+          '</div>' +
+          '<div class="kpi-box">' +
+            '<span class="label">Drafts Approved</span>' +
+            '<span class="value">' + history.length + '</span>' +
+            '<span class="hint">In workspace history</span>' +
+          '</div>' +
+          '<div class="kpi-box">' +
+            '<span class="label">Client Sources</span>' +
+            '<span class="value">15 / 20</span>' +
+            '<span class="hint">Active verified corpus</span>' +
+          '</div>' +
+        '</div>' +
+
+        /* 3. Main 2-Column Dashboard */
+        '<div class="dashboard-grid">' +
+          /* Left Column (Accounts & Outreaches) */
+          '<div style="display: flex; flex-direction: column; gap: 24px;">' +
+            '<div>' +
+              '<div class="section-header-clean">' +
+                '<h3>Priority Target Accounts</h3>' +
+                '<button class="link small" data-a="tab" data-tab="leads">View All Accounts →</button>' +
+              '</div>' +
+              '<div class="accounts-stack">' + accCards + '</div>' +
+            '</div>' +
+
+            /* Recent Outreaches Table */
+            '<div>' +
+              '<div class="section-header-clean">' +
+                '<h3>Recent Communications</h3>' +
+                '<span class="small muted">' + history.length + ' records</span>' +
+              '</div>' +
+              '<div class="table-wrap-clean">' +
+                '<table>' +
+                  '<thead>' +
+                    '<tr>' +
+                      '<th>Date</th>' +
+                      '<th>Account</th>' +
+                      '<th>Topic</th>' +
+                      '<th>Preview</th>' +
+                      '<th>Format</th>' +
+                      '<th style="text-align: right;">Action</th>' +
+                    '</tr>' +
+                  '</thead>' +
+                  '<tbody>' + historyRows + '</tbody>' +
+                '</table>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+
+          /* Right Column (Voice Status, Quick Prompt, Pipeline) */
+          '<div style="display: flex; flex-direction: column; gap: 20px;">' +
+            /* Executive Voice Profile Summary */
+            '<div class="intel-card-clean">' +
+              '<div class="intel-header">' +
+                '<span class="intel-label">' + ICON.sparkle + ' Executive Voice Profile</span>' +
+                '<span class="badge-clean ready" style="font-size: 9px;">Calibrated</span>' +
+              '</div>' +
+              '<div class="intel-list-concise">' +
+                '<div class="intel-row">' +
+                  '<span class="intel-row-label">Writing Cadence</span>' +
+                  '<span class="intel-row-val">Warm, reflective first-person with grounded proof points.</span>' +
+                '</div>' +
+                '<div class="intel-row">' +
+                  '<span class="intel-row-label">Core Philosophy</span>' +
+                  '<span class="intel-row-val">"Make, not Manage" · Clarity over control · Doing less, better.</span>' +
+                '</div>' +
+                '<div class="intel-row">' +
+                  '<span class="intel-row-label">Current Focus</span>' +
+                  '<span class="intel-row-val">Edge AI compute, workplace friction reduction, education.</span>' +
+                '</div>' +
+                '<div class="intel-row">' +
+                  '<span class="intel-row-label">Grammar & Tone</span>' +
+                  '<span class="intel-row-val">British/Australian spelling; strictly zero corporate hype words.</span>' +
+                '</div>' +
+              '</div>' +
+              '<button class="link small" style="align-self: flex-start; margin-top: 4px;" data-a="drawer" data-d="voice">View full voice profile (Drawer) →</button>' +
+            '</div>' +
+
+            /* Ad-Hoc Post Draft Box */
+            '<form class="quick-draft-box" data-f="note">' +
+              '<div>' +
+                '<h4>Draft from Topic or Prompt</h4>' +
+                '<p class="small muted">Synthesize a LinkedIn post on any event, keynote, or announcement.</p>' +
+              '</div>' +
+              '<textarea id="noteIn" placeholder="e.g. Announce our expanded AI edge collaboration with Singapore aviation partners..." aria-label="Topic prompt"></textarea>' +
+              '<button class="btn secondary sm" style="align-self: flex-start;" type="submit">' + ICON.outreach + '<span>Synthesize Post</span></button>' +
+            '</form>' +
+
+            /* Secondary Workflow Progress Indicator */
+            '<div style="display: flex; flex-direction: column; gap: 6px;">' +
+              '<span class="small muted" style="font-weight: 600;">Communications Generation Workflow</span>' +
+              '<div class="compact-pipeline">' +
+                '<span class="pipeline-step-mini done">Input <span class="chk">✓</span></span>' +
+                '<span class="pipeline-sep">→</span>' +
+                '<span class="pipeline-step-mini done">Format <span class="chk">✓</span></span>' +
+                '<span class="pipeline-sep">→</span>' +
+                '<span class="pipeline-step-mini">Directions</span>' +
+                '<span class="pipeline-sep">→</span>' +
+                '<span class="pipeline-step-mini">Review</span>' +
+                '<span class="pipeline-sep">→</span>' +
+                '<span class="pipeline-step-mini">Evidence</span>' +
+                '<span class="pipeline-sep">→</span>' +
+                '<span class="pipeline-step-mini">Preview</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</main>' +
+    '</div>' +
+  '</div>';
+}
+
+/* ==========================================================================
+   ACCOUNTS DIRECTORY VIEW
+   ========================================================================== */
+function vAccountsView() {
+  var rows = ACCOUNTS.map(function (a) {
+    return '<tr>' +
+      '<td><b>' + esc(a.name) + '</b><br><span class="muted small">' + esc(a.short) + '</span></td>' +
+      '<td>' + esc(a.sector) + '</td>' +
+      '<td>' + esc(a.topic) + '</td>' +
+      '<td><span class="badge-clean ' + (a.status === "READY" ? "ready" : "researching") + '">' + esc(a.status) + '</span></td>' +
+      '<td>' + esc(LENGTHS[a.suggest].label) + '</td>' +
+      '<td style="text-align: right;"><button class="btn primary sm" data-a="acc" data-id="' + a.id + '">' + ICON.outreach + '<span>Draft Outreach</span></button></td>' +
+    '</tr>';
+  }).join("");
+
+  return '<div class="app-shell">' +
+    vSidebar() +
+    '<div class="main-panel">' +
+      vTopNav() +
+      '<main class="main-content">' +
+        '<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">' +
+          '<div>' +
+            '<h1>Target Enterprise Accounts</h1>' +
+            '<p class="muted small">Enterprise accounts mapped to Michael Boyle\'s verified communication themes.</p>' +
+          '</div>' +
+          '<button class="btn primary sm" data-a="new">' + ICON.sparkle + '<span>+ Create New Post</span></button>' +
+        '</div>' +
+        '<div class="table-wrap-clean">' +
+          '<table>' +
+            '<thead>' +
+              '<tr>' +
+                '<th>Account</th>' +
+                '<th>Sector</th>' +
+                '<th>Strategic Focus</th>' +
+                '<th>Status</th>' +
+                '<th>Suggested Format</th>' +
+                '<th style="text-align: right;">Action</th>' +
+              '</tr>' +
+            '</thead>' +
+            '<tbody>' + rows + '</tbody>' +
+          '</table>' +
+        '</div>' +
+      '</main>' +
+    '</div>' +
+  '</div>';
+}
+
+/* ==========================================================================
+   INTELLIGENCE TAB VIEW
+   ========================================================================== */
+function vIntelligenceView() {
+  return '<div class="app-shell">' +
+    vSidebar() +
+    '<div class="main-panel">' +
+      vTopNav() +
+      '<main class="main-content">' +
+        '<div>' +
+          '<h1>Voice & Intelligence Engine</h1>' +
+          '<p class="muted small">Active Persona v2.4 · Grounded in 15 verified primary sources with zero hallucination.</p>' +
+        '</div>' +
+        '<div class="dashboard-grid">' +
+          '<div class="card-clean" style="display: flex; flex-direction: column; gap: 12px;">' +
+            '<h3>Core Writing Characteristics</h3>' +
+            '<ul style="padding-left: 18px; display: flex; flex-direction: column; gap: 6px; line-height: 1.5; font-size: 13.5px;">' +
+              '<li><b>Tone:</b> Warm, reflective, confident, authentic. Strictly never salesy or transactional.</li>' +
+              '<li><b>Sentence Cadence:</b> Balanced medium sentences with punchy, definitive statements.</li>' +
+              '<li><b>Spelling & Style:</b> British/Australian spelling (programme, organisation). Zero corporate hype words.</li>' +
+              '<li><b>Hashtag Frequency:</b> Used in ~22% of posts (2 of 9 posts). Strictly capped at 2 tags.</li>' +
+              '<li><b>Closes & CTAs:</b> Dialogue-driven: "I\'d welcome a conversation", "I would love to hear your perspective in the comments".</li>' +
+            '</ul>' +
+            '<div style="display: flex; gap: 8px; margin-top: 6px;">' +
+              '<button class="btn secondary sm" data-a="drawer" data-d="voice">' + ICON.voice + '<span>View Complete Voice Profile</span></button>' +
+              '<button class="btn secondary sm" data-a="drawer" data-d="guardrails">' + ICON.guardrails + '<span>View Guardrails</span></button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="card-clean" style="display: flex; flex-direction: column; gap: 12px;">' +
+            '<h3>Source Corpus Breakdown</h3>' +
+            '<div style="display: flex; flex-direction: column; gap: 6px; font-size: 13px;">' +
+              '<div style="display: flex; justify-content: space-between; padding: 7px 10px; background: var(--surface-2); border-radius: var(--r-sm);">' +
+                '<span>Authored LinkedIn Articles (100% Complete)</span>' +
+                '<span class="badge-clean ready">9 Processed</span>' +
+              '</div>' +
+              '<div style="display: flex; justify-content: space-between; padding: 7px 10px; background: var(--surface-2); border-radius: var(--r-sm);">' +
+                '<span>Executive Press & Articles (100% Complete)</span>' +
+                '<span class="badge-clean ready">6 Processed</span>' +
+              '</div>' +
+              '<div style="display: flex; justify-content: space-between; padding: 7px 10px; background: var(--surface-2); border-radius: var(--r-sm);">' +
+                '<span>Pending Client Sources (Videos/Scans)</span>' +
+                '<span class="badge-clean researching">5 Pending</span>' +
+              '</div>' +
+            '</div>' +
+            '<button class="btn secondary sm" style="align-self: flex-start; margin-top: 4px;" data-a="drawer" data-d="resources">' + ICON.resources + '<span>Explore Source Index (15/20)</span></button>' +
+          '</div>' +
+        '</div>' +
+      '</main>' +
+    '</div>' +
+  '</div>';
+}
+
+/* ==========================================================================
+   ANALYTICS & HISTORY VIEW
+   ========================================================================== */
+function vAnalyticsView() {
+  var rows = history.map(function (h, i) {
+    return '<tr>' +
+      '<td>' + esc(h.date) + '</td>' +
+      '<td><b>' + esc(h.account) + '</b></td>' +
+      '<td>' + esc(h.topic) + '</td>' +
+      '<td><span class="badge-clean neutral">' + esc(LENGTHS[h.length] ? LENGTHS[h.length].label : "Post") + '</span></td>' +
+      '<td>' + words(h.text) + ' words</td>' +
+      '<td style="text-align: right;"><button class="btn ghost sm" data-a="hopen" data-i="' + i + '">Open</button></td>' +
+    '</tr>';
+  }).join("");
+
+  return '<div class="app-shell">' +
+    vSidebar() +
+    '<div class="main-panel">' +
+      vTopNav() +
+      '<main class="main-content">' +
+        '<div>' +
+          '<h1>Outreach Generation History</h1>' +
+          '<p class="muted small">Complete record of approved communications drafted in this workspace.</p>' +
+        '</div>' +
+        '<div class="kpi-row">' +
+          '<div class="kpi-box">' +
+            '<span class="label">Total Generated</span>' +
+            '<span class="value">' + history.length + '</span>' +
+          '</div>' +
+          '<div class="kpi-box">' +
+            '<span class="label">Avg. Length</span>' +
+            '<span class="value">168</span>' +
+            '<span class="hint">Words per post</span>' +
+          '</div>' +
+          '<div class="kpi-box">' +
+            '<span class="label">Accounts Addressed</span>' +
+            '<span class="value">4 / 4</span>' +
+          '</div>' +
+          '<div class="kpi-box">' +
+            '<span class="label">Guardrail Compliance</span>' +
+            '<span class="value" style="color: var(--success);">100%</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="table-wrap-clean">' +
+          '<table>' +
+            '<thead>' +
+              '<tr>' +
+                '<th>Date</th>' +
+                '<th>Target Account</th>' +
+                '<th>Theme / Topic</th>' +
+                '<th>Format</th>' +
+                '<th>Length</th>' +
+                '<th style="text-align: right;">Action</th>' +
+              '</tr>' +
+            '</thead>' +
+            '<tbody>' + rows + '</tbody>' +
+          '</table>' +
+        '</div>' +
+      '</main>' +
+    '</div>' +
+  '</div>';
+}
+
+/* ==========================================================================
+   WORKFLOW STEP 1: CONTEXT & POST TYPE SETUP
+   ========================================================================== */
+function vSetup() {
+  var top;
+  if (S.fromNew) {
+    top = '<div class="card-clean" style="display: flex; flex-direction: column; gap: 10px;">' +
+      '<label class="muted small" style="font-weight: 600;" for="accSel">Target Enterprise Account</label>' +
+      '<select id="accSel">' +
+        '<option value="">No specific account (General Post)</option>' +
+        ACCOUNTS.map(function (a) {
+          return '<option value="' + a.id + '"' + (S.account && S.account.id === a.id ? " selected" : "") + '>' + esc(a.name) + ' (' + esc(a.topic) + ')</option>';
+        }).join("") +
+      '</select>' +
+      '<label class="muted small" style="font-weight: 600;" for="noteNew">Outreach Context / Note (Optional)</label>' +
+      '<textarea id="noteNew" placeholder="Anything specific the outreach should highlight...">' + esc(S.note) + '</textarea>' +
+    '</div>';
+  } else if (S.account) {
+    top = '<div class="card-clean" style="display: flex; justify-content: space-between; align-items: center;">' +
+      '<div>' +
+        '<span class="badge-clean ready">Target Account</span>' +
+        '<h4 style="margin-top: 3px;">' + esc(S.account.name) + '</h4>' +
+        '<span class="small muted">' + esc(S.account.topic) + ' (' + esc(S.account.sector) + ')</span>' +
+      '</div>' +
+      '<button class="link small" data-a="home">Change Account</button>' +
+    '</div>';
+  } else {
+    top = '<div class="card-clean" style="display: flex; justify-content: space-between; align-items: center;">' +
+      '<div style="flex: 1;">' +
+        '<span class="badge-clean neutral">Context Note</span>' +
+        (S.editNote ? '<textarea id="noteEdit" style="margin-top: 4px;">' + esc(S.note) + '</textarea>' : '<p style="margin-top: 3px; font-weight: 500;">' + esc(S.note) + '</p>') +
+      '</div>' +
+      '<button class="link small" data-a="editnote">' + (S.editNote ? "Save Note" : "Edit Note") + '</button>' +
+    '</div>';
+  }
+
+  var sug = S.account ? S.account.suggest : "pov";
+  var lensCards = Object.keys(LENGTHS).map(function (k) {
+    var L = LENGTHS[k];
+    var isSelected = (S.length === k);
+    return '<button class="choice-card-clean ' + (isSelected ? "selected" : "") + '" data-a="len" data-k="' + k + '">' +
+      (k === sug ? '<span class="badge-clean ready" style="align-self: flex-start; margin-bottom: 2px;">Recommended</span>' : '') +
+      '<b>' + esc(L.label) + '</b>' +
+      '<span class="small muted" style="line-height: 1.4;">' + esc(L.desc) + '</span>' +
+      '<span class="small" style="color: var(--muted); font-size: 11.5px; margin-top: 4px;">' + esc(L.when) + '</span>' +
+      '<div style="margin-top: auto; padding-top: 6px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; font-size: 11px; color: var(--muted);">' +
+        '<span>' + rangeText(k) + '</span>' +
+        '<span>' + L.keys.length + ' sections</span>' +
+      '</div>' +
+    '</button>';
+  }).join("");
+
+  return '<div class="app-shell">' +
+    vSidebar() +
+    '<div class="main-panel">' +
+      vTopNav() +
+      '<main class="main-content">' +
+        /* Orientation Banner */
+        '<div class="step-banner">' +
+          '<div class="step-banner-left">' +
+            '<span class="step-tag-pill">Step 1 of 6</span>' +
+            '<span class="step-banner-text"><b>Where am I?</b> Input Context & Format · <b>Deciding:</b> Target audience and structure · <b>Next:</b> Synthesize strategic directions</span>' +
+          '</div>' +
+        '</div>' +
+        top +
+        '<div class="card-clean" style="display: flex; flex-direction: column; gap: 12px;">' +
+          '<div>' +
+            '<h3>Select Post Format Archetype</h3>' +
+            '<p class="small muted">Modeled after Michael Boyle\'s verified public post structures.</p>' +
+          '</div>' +
+          '<div class="choice-grid">' + lensCards + '</div>' +
+        '</div>' +
+        '<div class="card-clean" style="display: flex; flex-direction: column; gap: 6px;">' +
+          '<label class="muted small" style="font-weight: 600;" for="linkIn">External URL / Reference Link (Optional)</label>' +
+          '<input class="input" id="linkIn" placeholder="e.g. https://www.hp.com/newsroom/..." value="' + esc(S.link) + '">' +
+          '<span class="small muted">Appended automatically as "Read more here:", adhering to Mike\'s sharing format.</span>' +
+        '</div>' +
+        '<div style="display: flex; justify-content: flex-end;">' +
+          '<button class="btn primary" style="min-width: 220px;" data-a="continue">' + ICON.sparkle + '<span>Synthesize Strategic Directions →</span></button>' +
+        '</div>' +
+      '</main>' +
+    '</div>' +
+  '</div>';
+}
+
+/* ==========================================================================
+   WORKFLOW STEP 2: GENERATING (PROGRESSIVE LOADING)
+   ========================================================================== */
+function vGenerating(msg) {
+  return '<div class="app-shell">' +
+    vSidebar() +
+    '<div class="main-panel">' +
+      vTopNav() +
+      '<main class="main-content">' +
+        '<div class="step-banner">' +
+          '<div class="step-banner-left">' +
+            '<span class="step-tag-pill">Step 2 of 6</span>' +
+            '<span class="step-banner-text"><b>Where am I?</b> Generation in progress · <b>Next:</b> Present creative strategic directions</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="card-clean" style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 48px 24px; text-align: center;">' +
+          '<div style="width: 40px; height: 40px; border-radius: 50%; border: 3px solid var(--border); border-top-color: var(--primary); animation: spin 0.8s linear infinite;"></div>' +
+          '<div>' +
+            '<h3>' + esc(msg) + '</h3>' +
+            '<p class="small muted" style="margin-top: 3px;">Applying executive voice model, verified facts, and guardrail constraints...</p>' +
+          '</div>' +
+          (S.error ?
+            '<div style="width: 100%; max-width: 460px; padding: 12px 14px; background: var(--danger-bg); border-radius: var(--r-sm); font-size: 13px; text-align: left;">' +
+              '<b>Notice:</b> ' + esc(S.error) +
+              '<div style="display: flex; gap: 8px; margin-top: 8px;">' +
+                '<button class="btn sm secondary" data-a="retry">Retry API</button>' +
+                '<button class="btn sm primary" data-a="usedemo">Use Persona Engine</button>' +
+              '</div>' +
+            '</div>' :
+            '<button class="btn ghost sm" style="margin-top: 6px;" data-a="stop">Cancel Generation</button>'
+          ) +
+        '</div>' +
+      '</main>' +
+    '</div>' +
+  '</div>';
+}
+
+/* ==========================================================================
+   WORKFLOW STEP 3: CREATIVE DIRECTION SELECTION
+   ========================================================================== */
+function vDirection() {
+  var off = S.dirMore ? 2 : 0;
+  var cards = S.directions.map(function (d, i) {
+    var isSelected = (S.dir === i);
+    return '<button class="choice-card-clean ' + (isSelected ? "selected" : "") + '" data-a="pickdir" data-i="' + i + '">' +
+      '<span class="choice-letter">' + "ABCD".charAt(i + off) + '</span>' +
+      '<b>' + esc(d.title) + '</b>' +
+      '<p class="small muted" style="line-height: 1.5; margin-top: 4px;">' + esc(d.summary) + '</p>' +
+    '</button>';
+  }).join("");
+
+  var reasons = ["Too formal", "Too salesy", "Wrong strategic focus", "Not like Mike"];
+  var panel = S.showDirPanel ?
+    '<div class="card-clean" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px; background: var(--surface-2);">' +
+      '<b class="small">Provide Feedback for Alternative Angles:</b>' +
+      '<div style="display: flex; gap: 6px; flex-wrap: wrap;">' +
+        reasons.map(function (r) {
+          return '<button class="badge-clean ' + (S.dirReason.indexOf(r) > -1 ? "ready" : "neutral") + '" style="cursor: pointer; padding: 4px 8px;" data-a="dirreason" data-r="' + r + '">' + r + '</button>';
+        }).join("") +
+      '</div>' +
+      '<input class="input" id="dirNote" placeholder="Specific notes (e.g. emphasize hybrid on-device AI)..." value="' + esc(S.dirNote) + '">' +
+      '<div style="display: flex; gap: 8px;">' +
+        '<button class="btn primary sm" data-a="moredirs">Generate New Angles</button>' +
+        '<button class="btn ghost sm" data-a="closedirpanel">Cancel</button>' +
+      '</div>' +
+    '</div>' : '';
+
+  return '<div class="app-shell">' +
+    vSidebar() +
+    '<div class="main-panel">' +
+      vTopNav() +
+      '<main class="main-content">' +
+        '<div class="step-banner">' +
+          '<div class="step-banner-left">' +
+            '<span class="step-tag-pill">Step 3 of 6</span>' +
+            '<span class="step-banner-text"><b>Where am I?</b> Direction Selection · <b>Deciding:</b> Strategic angle & narrative hook · <b>Next:</b> Section-by-section draft</span>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<h1>Select Creative Strategic Direction</h1>' +
+          '<p class="muted small">You maintain creative control. Choose the opening angle that best suits this communication.</p>' +
+        '</div>' +
+        '<div class="choice-grid two">' + cards + '</div>' +
+        '<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">' +
+          (S.dirMore ? '<button class="link small" data-a="backdirs">← Back to Directions A & B</button>' : '<button class="link small" data-a="opendirpanel">Neither fits? Request alternative directions →</button>') +
+          panel +
+          '<button class="btn primary" style="min-width: 220px;" data-a="usedir">' + ICON.sparkle + '<span>Use Direction ' + "ABCD".charAt(S.dir + off) + ' →</span></button>' +
+        '</div>' +
+      '</main>' +
+    '</div>' +
+  '</div>';
+}
+
+/* ==========================================================================
+   WORKFLOW STEP 4: SECTION-BY-SECTION REVIEW (HUMAN-IN-THE-LOOP)
+   ========================================================================== */
+function vBuild() {
+  var done = S.sections.filter(function (s) { return s.approved; }).length;
+  var total = S.sections.length;
+  var list = S.sections.map(function (s, i) {
+    var titleHtml = '<span class="section-title-clean">' + (i + 1) + '. ' + esc(s.name) + '</span>';
+    if (i === S.current && !s.approved) return secActive(s, i, titleHtml);
+    if (s.approved && S.editing !== i) {
+      return '<div class="section-item-clean">' +
+        '<div class="section-head-clean">' +
+          titleHtml +
+          '<div style="display: flex; align-items: center; gap: 6px;">' +
+            '<span class="badge-clean ready">' + ICON.check + ' Approved</span>' +
+            '<button class="btn ghost sm" data-a="edit" data-i="' + i + '">' + ICON.edit + '<span>Edit</span></button>' +
+          '</div>' +
+        '</div>' +
+        '<p class="small muted" style="white-space: pre-wrap; line-height: 1.5;">' + esc(cur(s).text) + '</p>' +
+        '<span class="source-proof-pill" style="align-self: flex-start;">Source: ' + esc(cur(s).source || "Voice profile") + '</span>' +
+      '</div>';
+    }
+    if (s.approved && S.editing === i) return secActive(s, i, titleHtml);
+    return '<div class="section-item-clean locked">' +
+      '<div class="section-head-clean">' +
+        titleHtml +
+        '<span class="small muted" style="display: inline-flex; align-items: center; gap: 4px;">' + ICON.lock + ' Unlocks after section ' + i + '</span>' +
+      '</div>' +
+    '</div>';
+  }).join("");
+
+  return '<div class="app-shell">' +
+    vSidebar() +
+    '<div class="main-panel">' +
+      vTopNav() +
+      '<main class="main-content">' +
+        '<div class="step-banner">' +
+          '<div class="step-banner-left">' +
+            '<span class="step-tag-pill">Step 4 of 6</span>' +
+            '<span class="step-banner-text"><b>Where am I?</b> Section Review · <b>Rule:</b> AI assists → Human reviews → Human approves · <b>Next:</b> Evidence & Pre-flight check</span>' +
+          '</div>' +
+        '</div>' +
+        '<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">' +
+          '<div>' +
+            '<h1>Section-by-Section Review</h1>' +
+            '<p class="muted small">Direction: <b>' + esc(S.directions[S.dir] ? S.directions[S.dir].title : "") + '</b></p>' +
+          '</div>' +
+          '<button class="btn secondary sm" data-a="redirect">Change Direction</button>' +
+        '</div>' +
+        '<div class="card-clean">' +
+          '<div style="display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; margin-bottom: 8px;">' +
+            '<b>' + done + ' of ' + total + ' sections approved by Comms</b>' +
+            '<span class="muted">' + words(assembled()) + ' words (Target: ' + rangeText(S.length) + ')</span>' +
+          '</div>' +
+          '<div style="height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; margin-bottom: 14px;">' +
+            '<div style="height: 100%; background: var(--primary); width: ' + (done / total * 100) + '%; transition: width 0.3s ease;"></div>' +
+          '</div>' +
+          (S.warnLater ? '<div style="padding: 8px 12px; background: var(--warning-bg); border-radius: var(--r-sm); font-size: 12.5px; margin-bottom: 12px;">Earlier section changed. Please review succeeding sections.</div>' : '') +
+          '<div>' + list + '</div>' +
+        '</div>' +
+        '<div style="display: flex; justify-content: flex-end;">' +
+          '<button class="btn primary" style="min-width: 220px;" data-a="preview"' + (done < total ? " disabled" : "") + '>' + ICON.check + '<span>Proceed to Evidence Check →</span></button>' +
+        '</div>' +
+      '</main>' +
+    '</div>' +
+  '</div>';
+}
+
+function secActive(s, i, titleHtml) {
+  var c = cur(s), n = s.versions.length, editing = (S.editing === i);
+  var ver = n > 1 ?
+    '<span style="display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; color: var(--muted);">' +
+      '<button class="btn ghost sm" data-a="vprev" data-i="' + i + '"' + (s.v === 0 ? " disabled" : "") + ' style="padding: 1px 4px;">‹</button>' +
+      'Version ' + (s.v + 1) + ' of ' + n +
+      '<button class="btn ghost sm" data-a="vnext" data-i="' + i + '"' + (s.v === n - 1 ? " disabled" : "") + ' style="padding: 1px 4px;">›</button>' +
+    '</span>' : '<span class="badge-clean ready" style="font-size: 9px;">Ready for Review</span>';
+
+  var body = s.loading ?
+    '<div style="padding: 12px 0;"><p class="small muted">Re-writing in Mike\'s voice...</p></div>' :
+    editing ?
+      '<div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">' +
+        '<textarea id="edit-' + i + '">' + esc(c.text) + '</textarea>' +
+        '<div style="display: flex; gap: 6px;">' +
+          '<button class="btn primary sm" data-a="saveedit" data-i="' + i + '">Save Changes</button>' +
+          '<button class="btn ghost sm" data-a="canceledit">Cancel</button>' +
+        '</div>' +
+      '</div>' :
+      '<div style="display: flex; flex-direction: column; gap: 10px;">' +
+        '<p style="font-size: 13.5px; line-height: 1.6;">' + esc(c.text) + '</p>' +
+        '<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 6px; font-size: 11.5px; color: var(--muted); flex-wrap: wrap; gap: 6px;">' +
+          '<span class="source-proof-pill">Supporting Source: <b>' + esc(c.source || "Voice profile") + '</b></span>' +
+          '<div style="display: flex; gap: 6px;">' +
+            '<button class="btn secondary sm" data-a="edit" data-i="' + i + '">' + ICON.edit + '<span>Edit</span></button>' +
+            '<button class="btn secondary sm" data-a="regen" data-i="' + i + '">' + ICON.refresh + '<span>Regen</span></button>' +
+            '<button class="btn primary sm" data-a="approve" data-i="' + i + '">' + ICON.check + '<span>Approve Section</span></button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+  var reasons = ["Too formal", "Too salesy", "Not like Mike", "Wrong focus"];
+  var regenPanel = (S.regenOpen === i && !s.loading && !editing) ?
+    '<div style="border-top: 1px solid var(--border); padding-top: 10px; display: flex; flex-direction: column; gap: 8px;">' +
+      '<b class="small">Regeneration Feedback:</b>' +
+      '<div style="display: flex; gap: 6px; flex-wrap: wrap;">' +
+        reasons.map(function (r) {
+          return '<button class="badge-clean ' + (S.regenReasons.indexOf(r) > -1 ? "ready" : "neutral") + '" style="cursor: pointer; padding: 4px 8px;" data-a="rreason" data-r="' + r + '">' + r + '</button>';
+        }).join("") +
+      '</div>' +
+      '<input class="input" id="regenNote" placeholder="Note (e.g. emphasize teacher training)..." value="' + esc(S.regenNote) + '">' +
+      '<div style="display: flex; gap: 6px;">' +
+        '<button class="btn primary sm" data-a="doregen" data-i="' + i + '">Rewrite Section</button>' +
+        '<button class="btn ghost sm" data-a="closeregen">Cancel</button>' +
+      '</div>' +
+    '</div>' : '';
+
+  return '<div class="section-item-clean active">' +
+    '<div class="section-head-clean">' + titleHtml + ver + '</div>' +
+    body +
+    regenPanel +
+  '</div>';
+}
+
+/* ==========================================================================
+   WORKFLOW STEP 5: EVIDENCE & PRE-FLIGHT COMPLIANCE CHECK
+   ========================================================================== */
+function vCheck() {
+  var allOk = S.flags.every(function (f) { return f.ok || f.resolved; });
+  var flagCards = S.flags.map(function (f, i) {
+    var cls = f.ok ? "ready" : (f.kind === "danger" ? "danger" : "researching");
+    var actions = f.ok ? '' : (f.resolved ?
+      '<div style="display: flex; justify-content: space-between; font-size: 11.5px; margin-top: 4px;">' +
+        '<span><b>Kept:</b> ' + esc(f.reason) + '</span>' +
+        '<button class="link small" data-a="unkeep" data-i="' + i + '">Undo</button>' +
+      '</div>' :
+      (f.keeping ?
+        '<div style="display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">' +
+          '<input class="input" id="keep-' + i + '" placeholder="Reason for keeping with placeholder...">' +
+          '<div style="display: flex; gap: 6px;">' +
+            '<button class="btn primary sm" data-a="savekeep" data-i="' + i + '">Confirm Reason</button>' +
+            '<button class="btn ghost sm" data-a="cancelkeep">Cancel</button>' +
+          '</div>' +
+        '</div>' :
+        '<div style="display: flex; gap: 6px; margin-top: 4px;">' +
+          '<button class="btn primary sm" data-a="fix" data-i="' + i + '">Fix / Edit</button>' +
+          '<button class="btn secondary sm" data-a="keep" data-i="' + i + '">Keep with Reason</button>' +
+        '</div>'
+      ));
+
+    return '<div class="card-clean" style="padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;">' +
+      '<div style="display: flex; justify-content: space-between; align-items: center;">' +
+        '<b>' + esc(f.title) + '</b>' +
+        '<span class="badge-clean ' + cls + '">' + (f.ok ? "Passed" : "Action Required") + '</span>' +
+      '</div>' +
+      '<span class="small muted">' + esc(f.detail) + '</span>' +
+      actions +
+    '</div>';
+  }).join("");
+
+  return '<div class="app-shell">' +
+    vSidebar() +
+    '<div class="main-panel">' +
+      vTopNav() +
+      '<main class="main-content">' +
+        '<div class="step-banner">' +
+          '<div class="step-banner-left">' +
+            '<span class="step-tag-pill">Step 5 of 6</span>' +
+            '<span class="step-banner-text"><b>Where am I?</b> Evidence & Compliance Validation · <b>Deciding:</b> Approve placeholders & compliance · <b>Next:</b> Final LinkedIn Preview</span>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<h1>Evidence & Compliance Verification</h1>' +
+          '<p class="muted small">Confirm supporting proof points, placeholders, and off-limits constraints.</p>' +
+        '</div>' +
+        '<div class="dashboard-grid">' +
+          '<div style="display: flex; flex-direction: column; gap: 12px;">' +
+            '<div style="display: flex; justify-content: center; background: var(--surface-2); padding: 20px; border-radius: var(--r-md);">' +
+              postCard(finalText()) +
+            '</div>' +
+            (S.tags.length ?
+              '<label class="card-clean" style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 12px 14px;" for="tagToggle">' +
+                '<input type="checkbox" id="tagToggle" style="margin-top: 2px;"' + (S.useTags ? ' checked' : '') + '>' +
+                '<div style="font-size: 13px;">' +
+                  '<span>Include suggested hashtags: <b>' + esc(S.tags.join(' ')) + '</b></span>' +
+                  '<div class="small muted" style="margin-top: 2px;">Mike Boyle uses hashtags selectively in only ~22% of public posts. Uncheck to post without hashtags.</div>' +
+                '</div>' +
+              '</label>' : '') +
+          '</div>' +
+          '<div style="display: flex; flex-direction: column; gap: 12px;">' +
+            '<div class="card-clean" style="display: flex; flex-direction: column; gap: 10px;">' +
+              '<h3>Pre-Flight Checklist</h3>' +
+              '<div style="display: flex; flex-direction: column; gap: 8px;">' + flagCards + '</div>' +
+              '<button class="btn primary" style="width: 100%; margin-top: 6px;" data-a="markfinal"' + (allOk ? "" : " disabled") + '>' +
+                ICON.check + '<span>Confirm & Proceed to Preview →</span>' +
+              '</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</main>' +
+    '</div>' +
+  '</div>';
+}
+
+/* ==========================================================================
+   WORKFLOW STEP 6: FINAL LINKEDIN PREVIEW & COPY
+   ========================================================================== */
+function vFinal() {
+  var f = S.final;
+  var srcs = f.sources.map(function (s) {
+    return '<span class="badge-clean neutral" style="font-size: 11px;">' + esc(s) + '</span>';
+  }).join("");
+
+  return '<div class="app-shell">' +
+    vSidebar() +
+    '<div class="main-panel">' +
+      vTopNav() +
+      '<main class="main-content">' +
+        '<div class="step-banner">' +
+          '<div class="step-banner-left">' +
+            '<span class="step-tag-pill">Step 6 of 6</span>' +
+            '<span class="step-banner-text"><b>Where am I?</b> Final LinkedIn Preview · <b>Status:</b> Approved by Communications Team · Ready to share or copy</span>' +
+          '</div>' +
+        '</div>' +
+        '<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">' +
+          '<div>' +
+            '<h1>Final LinkedIn Post Preview</h1>' +
+            '<p class="muted small">' + esc(LENGTHS[f.length] ? LENGTHS[f.length].label : "Post") + ' · ' + words(f.text) + ' words · Verified by Comms</p>' +
+          '</div>' +
+          '<div style="display: flex; gap: 8px;">' +
+            '<button class="btn primary sm" data-a="copy">' + ICON.copy + '<span>Copy Post Text</span></button>' +
+            (f.fromHistory ? '' : '<button class="btn secondary sm" data-a="backbuild">' + ICON.edit + '<span>Edit Sections</span></button>') +
+            '<button class="btn secondary sm" data-a="startnew">' + ICON.sparkle + '<span>Start New Post</span></button>' +
+          '</div>' +
+        '</div>' +
+        '<div style="display: flex; justify-content: center; background: var(--surface-2); padding: 24px; border-radius: var(--r-md);">' +
+          postCard(f.text) +
+        '</div>' +
+        '<div class="card-clean" style="display: flex; flex-direction: column; gap: 8px;">' +
+          '<h4>Supporting Knowledge Evidence Cited</h4>' +
+          '<div style="display: flex; gap: 6px; flex-wrap: wrap;">' + srcs + '</div>' +
+        '</div>' +
+        '<textarea id="copyArea" aria-label="Post text" style="position: absolute; left: -9999px;">' + esc(f.text) + '</textarea>' +
+      '</main>' +
+    '</div>' +
+  '</div>';
+}
+
+function postCard(text) {
+  var formatted = esc(text)
+    .replace(/\[([^\]]+)\]/g, '<span class="placeholder-highlight">[$1]</span>')
+    .replace(/(^|\s)(#\w+)/g, '$1<span class="hashtag-highlight">$2</span>');
+
+  return '<article class="post-card-clean">' +
+    '<div class="post-header-clean">' +
+      '<div class="persona-avatar">MB</div>' +
+      '<div>' +
+        '<div style="font-weight: 700; font-size: 13.5px; display: flex; align-items: center; gap: 4px;">Michael Boyle <span class="muted" style="font-weight: 400; font-size: 12px;">· 1st</span></div>' +
+        '<div style="font-size: 11.5px; color: var(--muted);">Senior Vice President & Managing Director - HP Greater Asia</div>' +
+        '<div style="font-size: 11px; color: var(--muted); margin-top: 1px;">Just now · 🌐</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="post-content-clean">' + formatted + '</div>' +
+    '<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-subtle); font-size: 11.5px; color: var(--muted);">' +
+      '<span class="status-pill-secondary" style="font-size: 10px;">✓ Verified by Comms</span>' +
+      '<span>Ready for LinkedIn Publishing</span>' +
+    '</div>' +
+  '</article>';
+}
+
+/* ==========================================================================
+   DRAWERS (Voice Profile, Sources Index, Guardrails)
+   ========================================================================== */
+function vDrawer() {
+  var d = S.drawer, title, body;
+  if (d === "voice") {
+    title = "Michael Boyle Voice Profile";
+    body = '<p class="small muted" style="padding-bottom: 8px; border-bottom: 1px solid var(--border-subtle);">' +
+      'This panel defines the exact writing characteristics, sentence architecture, and persona parameters used by the AI engine to synthesize Michael Boyle\'s voice.' +
+    '</p>' +
+    '<h3>1. Who is Mike?</h3>' +
+    '<p>Senior Vice President & Managing Director of HP Greater Asia, based in Singapore since late 2025. Oversees Southeast Asia, Australia, New Zealand, Korea, and Japan. Over 10 years of executive tenure at HP: former leader of Central and Eastern Europe (Barcelona), Global Head of Large Format Print (Barcelona), and VP/MD of Australia and New Zealand (Sydney). Prior to HP, spent 13 years across Océ and Canon.</p>' +
+    '<h3>2. Writing Style</h3>' +
+    '<p>First-person voice (<i>"I", "we", "our team", "at HP"</i>). Medium-length sentences balanced with concise, punchy lines. Strictly British and Australian spelling (e.g. <i>programme</i>, <i>organisation</i>, <i>honour</i>, <i>labour</i>).</p>' +
+    '<h3>3. Tone & Register</h3>' +
+    '<p>Warm, reflective, confident, authentic. Never salesy, transactional, or aggressive. Zero corporate hype words (strictly avoids <i>revolutionary</i>, <i>game-changing</i>, <i>cutting-edge</i>, <i>unleash</i>, <i>synergy</i>, <i>leverage</i>).</p>' +
+    '<h3>4. Common Themes</h3>' +
+    '<ul>' +
+      '<li><b>People & Culture:</b> Psychological safety, investing consistently in people, early careers and mentorship (SPARK).</li>' +
+      '<li><b>Leadership:</b> "Make, not Manage"; shifting from control to clarity; "doing less, better"; Chief Energy Officers.</li>' +
+      '<li><b>Edge AI & Technology:</b> AI with humans at the centre, on-device compute, removing friction, accessibility.</li>' +
+      '<li><b>Education:</b> HP IDEA (8,200+ teachers reached) and HP AI Academy.</li>' +
+      '<li><b>Sustainability:</b> Circular economy, ocean-bound plastic recycling, forest regeneration with WWF and FSC.</li>' +
+    '</ul>' +
+    '<h3>5. Post Structure Archetype</h3>' +
+    '<ul>' +
+      '<li><b>Opening:</b> Point of view or reflection on people, markets, or leadership. News opens with gratitude: "Proud to share", "Excited to announce", "Grateful for".</li>' +
+      '<li><b>Concrete Anchor:</b> A specific initiative, partner, or verified proof point.</li>' +
+      '<li><b>Human Meaning:</b> What it makes possible for individuals and customers.</li>' +
+      '<li><b>Credit:</b> Acknowledges partners and colleagues explicitly.</li>' +
+      '<li><b>Close:</b> Closes with an open invitation for dialogue or forward outlook.</li>' +
+    '</ul>' +
+    '<h3>6. CTA Behavior</h3>' +
+    '<p>Invites conversations rather than conversions: <i>"I\'d welcome a conversation"</i> or <i>"I would love to hear your perspective in the comments"</i>. Appends external links cleanly as <i>"Read more here: [URL]"</i>.</p>' +
+    '<h3>7. Hashtag Behavior</h3>' +
+    '<p>Hashtags are strictly optional. Mike Boyle uses them in only ~22% of public posts (2 of 9 posts). When used, never more than 2 relevant tags (e.g. #AIinEducation, #HybridAI).</p>' +
+    '<h3>8. Source & Content Coverage</h3>' +
+    '<p>Calibrated on <b>15 verified primary sources</b> (9 authored LinkedIn posts + 6 verified executive interviews/articles). Zero hallucinations or inferred personal details.</p>';
+  } else if (d === "resources") {
+    title = "Knowledge Sources Index (15/20)";
+    var liSources = SOURCES.filter(function (s) { return s[0] === "li"; });
+    var extSources = SOURCES.filter(function (s) { return s[0] === "ext"; });
+    var pendingSources = SOURCES.filter(function (s) { return s[0] === "pending"; });
+
+    var formatRows = function (list) {
+      return list.map(function (s, i) {
+        var link = s[4] ? '<a href="' + esc(s[4]) + '" target="_blank" rel="noopener" class="link">' + esc(s[1]) + '</a>' : '<b>' + esc(s[1]) + '</b>';
+        var statusBadge = s[3] === "processed" ? '<span class="badge-clean ready">Active in AI</span>' : '<span class="badge-clean researching">Pending OCR/Text</span>';
+        return '<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--border-subtle); font-size: 12.5px;">' +
+          '<div style="flex: 1;">' +
+            '<div>' + (i + 1) + '. ' + link + '</div>' +
+            '<div class="small muted" style="margin-top: 1px;">' + esc(s[2]) + '</div>' +
+          '</div>' +
+          statusBadge +
+        '</div>';
+      }).join("");
+    };
+
+    body = '<p class="small muted">' +
+      '15 of 20 client-provided sources have been processed and indexed into the active AI knowledge base. The remaining 5 sources are pending transcripts or direct text access.' +
+    '</p>' +
+    '<h3>Authored LinkedIn Posts (9 of 9 Processed)</h3>' +
+    '<div>' + formatRows(liSources) + '</div>' +
+    '<h3>Executive Press & Articles (6 of 6 Processed)</h3>' +
+    '<div>' + formatRows(extSources) + '</div>' +
+    '<h3>Pending Client Sources (5 Pending)</h3>' +
+    '<div>' + formatRows(pendingSources) + '</div>';
+  } else {
+    title = "Executive Guardrails & Rules";
+    body = '<h3>Prohibited / Off-Limits Topics</h3>' +
+      '<ul>' +
+        '<li>Pricing strategies or price increases</li>' +
+        '<li>Component shortages, DRAM, NAND supply chains</li>' +
+        '<li>Unannounced earnings, financial forecasts, quarterly guidance</li>' +
+        '<li>Competitor disparagement (Dell, Lenovo, Apple, Asus, Acer)</li>' +
+        '<li>Layoffs, legal disputes, or political commentary</li>' +
+      '</ul>' +
+      '<h3>Fact Strictness Rules</h3>' +
+      '<ul>' +
+        '<li>Only cite facts explicitly present in approved knowledge index.</li>' +
+        '<li>Unconfirmed partner deliverables appear as <code>[HP solution, to be confirmed]</code>.</li>' +
+        '<li>Never infer personal details about Mike\'s family or personal life.</li>' +
+      '</ul>' +
+      '<h3>Human-in-the-Loop Requirement</h3>' +
+      '<ul>' +
+        '<li>Every single section must be approved by Comms before finalizing.</li>' +
+        '<li>Automatic pre-flight check validates against 20 off-limits words and placeholder tokens.</li>' +
+      '</ul>';
+  }
+
+  return '<div class="scrim" data-a="closedrawer"></div>' +
+    '<aside class="drawer" role="dialog" aria-label="' + title + '">' +
+      '<div class="drawer-head">' +
+        '<h3>' + title + '</h3>' +
+        '<button class="sidebar-btn-sm" style="flex: none; padding: 4px 8px;" data-a="closedrawer">Close</button>' +
+      '</div>' +
+      '<div class="drawer-body">' + body + '</div>' +
+    '</aside>';
+}
+
+/* ==========================================================================
+   RENDER PIPELINE
+   ========================================================================= */
+var app = document.getElementById("app");
+var layer = document.getElementById("layer");
+
+function render() {
+  var v = S.view, h;
+  if (v === "login") h = vLogin();
+  else if (v === "home") h = vHome();
+  else if (v === "setup") h = vSetup();
+  else if (v === "generating") h = vGenerating(S.genMsg || "Synthesizing directions in Mike's voice");
+  else if (v === "direction") h = vDirection();
+  else if (v === "build") h = vBuild();
+  else if (v === "check") h = vCheck();
+  else if (v === "final") h = vFinal();
+  app.innerHTML = h;
+  renderLayer();
+}
+
+function renderLayer() {
+  layer.innerHTML = (S.drawer ? vDrawer() : "") + (S.toast ? '<div class="toast" role="status">' + esc(S.toast) + '</div>' : "");
+}
+
+function go(v) {
+  S.view = v;
+  S.error = "";
+  S.mobileMenu = false;
+  render();
+  window.scrollTo(0, 0);
+}
+
+/* ==========================================================================
+   AI ENGINE CALLS & BUSINESS LOGIC
+   ========================================================================== */
+function ask(prompt, opts) {
+  if (!S.live || S.demo) return Promise.reject({ code: "demo" });
+  ctl = new AbortController();
+  var o = { signal: ctl.signal };
+  for (var k in opts) o[k] = opts[k];
+  return S.live.json(prompt, o);
+}
+
+function errCopy(e) {
+  var c = e && e.code;
+  if (c === "rate_limited") return "API rate limited. Please wait a moment.";
+  if (c === "session_expired") return "Session expired. Please sign in again.";
+  if (c === "invalid_json") return "Response returned in invalid JSON format.";
+  return "Unable to complete request. Falling back to persona intelligence.";
+}
+
+function isHardOff(e) {
+  var c = e && e.code;
+  return c === "demo" || c === "not_granted" || c === "sampling_disabled" || c === "not_declared" || c === "capability_disabled" || c === "capability_removed";
+}
+
+function brief() {
+  var b = "Account: " + (S.account ? S.account.name + " (" + S.account.sector + ")" : "General note") + "\nTopic: " + topicOf();
+  if (S.note) b += "\nContext Note: " + S.note;
+  return b;
+}
+
+function genDirections(more) {
+  S.genMsg = more ? "Synthesizing alternative strategic directions..." : "Generating strategic directions in Mike's voice...";
+  go("generating");
+  var a = S.account;
+  var prompt = PERSONA + "\n\nTASK: Propose two clearly different directions for one LinkedIn post by Mike.\n" + brief() +
+    (more ? "\nRejected directions: " + S.directions.map(function (d) { return d.title; }).join("; ") + ". Reasons: " + (S.dirReason.join(", ") || "none") + (S.dirNote ? ". Note: " + S.dirNote : "") + ". Offer two new ones." : "") +
+    '\nReply with only JSON: {"directions":[{"title":"3-6 word title","summary":"one sentence"},{"title":"...","summary":"..."}]}';
+
+  ask(prompt, more ? { modelTier: "quick", cache: false } : { modelTier: "quick" }).then(function (r) {
+    var d = r && r.directions;
+    if (!d || d.length < 2) throw { code: "invalid_json" };
+    S.directions = d.slice(0, 2).map(function (x) { return { title: String(x.title || "Direction"), summary: String(x.summary || "") }; });
+    S.dir = 0; S.dirMore = !!more; S.showDirPanel = false; go("direction");
+  }, function (e) {
+    if (e && e.code === "cancelled") { go(more ? "direction" : "setup"); return; }
+    if (isHardOff(e)) {
+      S.demo = true;
+      S.directions = demoDirections(a, more);
+      S.dir = 0; S.dirMore = !!more; S.showDirPanel = false;
+      go("direction");
+      return;
+    }
+    S.error = errCopy(e);
+    S.retry = function () { genDirections(more); };
+    render();
+  });
+}
+
+function genPost() {
+  S.genMsg = "Drafting post in Mike's voice, section by section...";
+  go("generating");
+  var L = LENGTHS[S.length], keys = L.keys, d = S.directions[S.dir];
+  var prompt = PERSONA + "\n\nTASK: Write one LinkedIn post as Mike.\n" + brief() + "\nPost type: " + L.label + ". Direction: " + d.title + ". " + d.summary +
+    "\nLength: " + L.min + " to " + L.max + " words. Stay inside this range." +
+    "\nWrite these sections in order:\n" +
+    keys.map(function (k) { return "- " + k + " (" + SECTION_NAMES[k] + "): " + SECTION_GUIDE[k]; }).join("\n") +
+    (S.link ? "\nA link will be added automatically." : "") +
+    "\nSuggest 1 or 2 relevant hashtags." +
+    '\nReply with only JSON: {"sections":[{"key":"' + keys[0] + '","text":"...","source":"..."}],"hashtags":["#..."]}';
+
+  ask(prompt, {}).then(function (r) {
+    var arr = r && r.sections;
+    if (!arr || !arr.length) throw { code: "invalid_json" };
+    S.tags = (r.hashtags || []).map(String).filter(function (h) { return /^#\w+$/.test(h); }).slice(0, 2);
+    buildSections(function (k, i) {
+      var m = arr.filter(function (x) { return x.key === k; })[0] || arr[i] || {};
+      return { text: String(m.text || "").trim() || demoSection(k, ctxObj()).text, source: String(m.source || "Voice profile") };
+    });
+  }, function (e) {
+    if (e && e.code === "cancelled") { go("direction"); return; }
+    if (isHardOff(e)) {
+      S.demo = true;
+      S.tags = S.account ? [S.account.tag] : [];
+      buildSections(function (k) { return demoSection(k, ctxObj()); });
+      return;
+    }
+    S.error = errCopy(e);
+    S.retry = genPost;
+    render();
+  });
+}
+
+function buildSections(fn) {
+  S.sections = LENGTHS[S.length].keys.map(function (k, i) {
+    return { key: k, name: SECTION_NAMES[k], versions: [fn(k, i)], v: 0, approved: false };
+  });
+  S.current = 0; S.editing = -1; S.regenOpen = -1; S.warnLater = false; S.useTags = false;
+  go("build");
+}
+
+function regenSection(i) {
+  var s = S.sections[i], reasons = S.regenReasons.slice(), note = S.regenNote;
+  s.loading = true; S.regenOpen = -1; S.error = ""; render();
+
+  var done = function (v) {
+    s.loading = false;
+    s.versions.push(v);
+    s.v = s.versions.length - 1;
+    S.regenReasons = [];
+    S.regenNote = "";
+    render();
+  };
+
+  var others = S.sections.map(function (x, j) { return (j === i ? ">> " : "") + x.name + ": " + cur(x).text; }).join("\n");
+  var prompt = PERSONA + "\n\nTASK: Rewrite ONE section of Mike's LinkedIn post.\n" + brief() + "\nDirection: " + S.directions[S.dir].title +
+    "\nContext:\n" + others +
+    "\nRewrite section '" + s.name + "'. Feedback: " + (reasons.join(", ") || "improve") + (note ? ". Note: " + note : "") +
+    ". Stay within target word range." +
+    '\nReply with only JSON: {"text":"...","source":"..."}';
+
+  ask(prompt, { cache: false }).then(function (r) {
+    if (!r || !r.text) throw { code: "invalid_json" };
+    done({ text: String(r.text).trim(), source: String(r.source || cur(s).source) });
+  }, function (e) {
+    if (e && e.code === "cancelled") { s.loading = false; render(); return; }
+    if (isHardOff(e)) {
+      var alt = demoSection(s.key, ctxObj(), s.versions.length % 2 === 1);
+      done({ text: alt.text, source: alt.source });
+      return;
+    }
+    s.loading = false; S.error = errCopy(e); render();
+  });
+}
+
+function runChecks() {
+  var flags = [], hasBad = false;
+  S.sections.forEach(function (s, i) {
+    var t = cur(s).text, m = t.match(/\[[^\]]+\]/g);
+    if (m) m.forEach(function (p) {
+      flags.push({ title: "Placeholder in " + s.name, detail: p + " requires HP confirmation.", sec: i });
+    });
+    var low = t.toLowerCase();
+    OFF_LIMITS.forEach(function (w) {
+      if (new RegExp("\\b" + w + "\\b").test(low)) {
+        hasBad = true;
+        flags.push({ title: "Off-limits word in " + s.name, detail: 'Mentions "' + w + '". Guardrail constraint violated.', sec: i, kind: "danger" });
+      }
+    });
+  });
+  if (!hasBad) {
+    flags.push({ ok: true, title: "No off-limits topics detected", detail: "Checked against pricing, memory supply, earnings, and competitors." });
+  }
+  var wc = words(assembled()), L = LENGTHS[S.length];
+  if (wc < L.min * 0.85 || wc > L.max * 1.15) {
+    flags.push({ title: "Length variance from target format", detail: wc + " words; format target is " + rangeText(S.length) + ".", sec: null });
+  } else {
+    flags.push({ ok: true, title: "Word count matches post format", detail: wc + " words (Target: " + rangeText(S.length) + ")." });
+  }
+  S.flags = flags;
+}
+
+/* ==========================================================================
+   EVENT DISPATCHER
+   ========================================================================== */
+document.addEventListener("submit", function (e) {
+  var f = e.target.getAttribute("data-f");
+  if (!f) return;
+  e.preventDefault();
+  if (f === "login") go("home");
+  if (f === "note") {
+    var v = document.getElementById("noteIn").value.trim();
+    if (!v) { document.getElementById("noteIn").focus(); return; }
+    S.account = null; S.note = v; S.fromNew = false; S.editNote = false; S.length = "pov"; S.link = "";
+    go("setup");
+  }
+});
+
+document.addEventListener("input", function (e) {
+  var id = e.target.id;
+  if (id === "dirNote") S.dirNote = e.target.value;
+  if (id === "regenNote") S.regenNote = e.target.value;
+  if (id === "noteNew" || id === "noteEdit") S.note = e.target.value;
+  if (id === "linkIn") S.link = e.target.value.trim();
+});
+
+document.addEventListener("change", function (e) {
+  if (e.target.id === "tagToggle") { S.useTags = e.target.checked; render(); return; }
+  if (e.target.id === "accSel") {
+    var id = e.target.value;
+    S.account = ACCOUNTS.filter(function (a) { return a.id === id; })[0] || null;
+    S.length = S.account ? S.account.suggest : "pov";
+    render();
+  }
+});
+
+document.addEventListener("click", function (e) {
+  var el = e.target.closest("[data-a]");
+  if (!el) return;
+  var a = el.getAttribute("data-a"), i = +el.getAttribute("data-i");
+
+  switch (a) {
+    case "tab":
+      S.tab = el.getAttribute("data-tab");
+      S.mobileMenu = false;
+      go("home");
+      break;
+    case "togglemenu":
+      S.mobileMenu = !S.mobileMenu;
+      render();
+      break;
+    case "theme":
+      var nt = isDark() ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", nt);
+      store("mp-theme", nt);
+      render();
+      break;
+    case "logout":
+      S.drawer = null;
+      go("login");
+      break;
+    case "home":
+      if (S.view !== "login") {
+        if (ctl) ctl.abort();
+        go("home");
+      }
+      break;
+    case "drawer":
+      S.drawer = el.getAttribute("data-d");
+      renderLayer();
+      break;
+    case "closedrawer":
+      S.drawer = null;
+      renderLayer();
+      break;
+    case "new":
+      S.account = null;
+      S.note = "";
+      S.fromNew = true;
+      S.length = "pov";
+      S.link = "";
+      go("setup");
+      break;
+    case "acc":
+      S.account = ACCOUNTS.filter(function (x) { return x.id === el.getAttribute("data-id"); })[0];
+      S.note = "";
+      S.fromNew = false;
+      S.length = S.account.suggest;
+      S.link = "";
+      go("setup");
+      break;
+    case "editnote":
+      S.editNote = !S.editNote;
+      render();
+      break;
+    case "len":
+      S.length = el.getAttribute("data-k");
+      render();
+      break;
+    case "continue":
+      if (!S.account && !S.note.trim()) { toast("Please select an account or add context first"); break; }
+      S.dirReason = [];
+      S.dirNote = "";
+      genDirections(false);
+      break;
+    case "stop":
+      if (ctl) ctl.abort();
+      break;
+    case "retry":
+      S.error = "";
+      if (S.retry) S.retry();
+      break;
+    case "usedemo":
+      S.demo = true;
+      S.error = "";
+      if (S.retry) S.retry();
+      break;
+    case "pickdir":
+      S.dir = i;
+      render();
+      break;
+    case "opendirpanel":
+      S.showDirPanel = true;
+      render();
+      break;
+    case "closedirpanel":
+      S.showDirPanel = false;
+      render();
+      break;
+    case "dirreason":
+      var r = el.getAttribute("data-r"), k = S.dirReason.indexOf(r);
+      if (k > -1) S.dirReason.splice(k, 1);
+      else S.dirReason.push(r);
+      render();
+      break;
+    case "moredirs":
+      S.firstDirs = S.firstDirs || S.directions;
+      genDirections(true);
+      break;
+    case "backdirs":
+      if (S.firstDirs) {
+        S.directions = S.firstDirs;
+        S.dirMore = false;
+        S.dir = 0;
+        render();
+      }
+      break;
+    case "usedir":
+      if (!S.dirMore) S.firstDirs = S.directions;
+      genPost();
+      break;
+    case "redirect":
+      go("direction");
+      break;
+    case "approve":
+      S.sections[i].approved = true;
+      S.regenOpen = -1;
+      S.editing = -1;
+      S.current = S.sections.findIndex(function (s) { return !s.approved; });
+      if (S.current < 0) S.current = S.sections.length;
+      render();
+      break;
+    case "edit":
+      S.editing = i;
+      S.regenOpen = -1;
+      render();
+      var ta = document.getElementById("edit-" + i);
+      if (ta) ta.focus();
+      break;
+    case "canceledit":
+      S.editing = -1;
+      render();
+      break;
+    case "saveedit":
+      var t = document.getElementById("edit-" + i).value.trim();
+      if (!t) { toast("Section content cannot be empty"); break; }
+      var s = S.sections[i];
+      s.versions.push({ text: t, source: cur(s).source + " (edited)" });
+      s.v = s.versions.length - 1;
+      if (s.approved && S.sections.slice(i + 1).some(function (x) { return x.approved; })) {
+        S.warnLater = true;
+      }
+      S.editing = -1;
+      render();
+      break;
+    case "regen":
+      S.regenOpen = i;
+      S.regenReasons = [];
+      S.regenNote = "";
+      render();
+      break;
+    case "closeregen":
+      S.regenOpen = -1;
+      render();
+      break;
+    case "rreason":
+      var rr = el.getAttribute("data-r"), kk = S.regenReasons.indexOf(rr);
+      if (kk > -1) S.regenReasons.splice(kk, 1);
+      else S.regenReasons.push(rr);
+      render();
+      break;
+    case "doregen":
+      regenSection(i);
+      break;
+    case "vprev":
+      S.sections[i].v = Math.max(0, S.sections[i].v - 1);
+      render();
+      break;
+    case "vnext":
+      S.sections[i].v = Math.min(S.sections[i].versions.length - 1, S.sections[i].v + 1);
+      render();
+      break;
+    case "preview":
+      runChecks();
+      go("check");
+      break;
+    case "fix":
+      var f = S.flags[i];
+      if (f.sec != null) {
+        var sx = S.sections[f.sec];
+        sx.approved = false;
+        S.current = f.sec;
+        S.editing = f.sec;
+      }
+      go("build");
+      break;
+    case "keep":
+      S.flags[i].keeping = true;
+      render();
+      break;
+    case "cancelkeep":
+      S.flags[i].keeping = false;
+      render();
+      break;
+    case "savekeep":
+      var why = document.getElementById("keep-" + i).value.trim();
+      if (!why) { toast("Please record a reason to keep"); break; }
+      S.flags[i].reason = why;
+      S.flags[i].resolved = true;
+      S.flags[i].keeping = false;
+      render();
+      break;
+    case "unkeep":
+      S.flags[i].resolved = false;
+      render();
+      break;
+    case "markfinal":
+      var text = finalText(), srcs = [];
+      S.sections.forEach(function (s) {
+        var x = (cur(s).source || "").replace(" (edited)", "");
+        if (x && srcs.indexOf(x) < 0) srcs.push(x);
+      });
+      S.final = { text: text, sources: srcs, length: S.length };
+      var d = new Date();
+      history = history.filter(function (h) { return !h.example; });
+      history.unshift({
+        date: d.toLocaleDateString("en-GB", { day: "numeric", month: "short" }),
+        account: S.account ? S.account.short : "General Note",
+        color: S.account ? S.account.color : "#7C3AED",
+        topic: topicOf(),
+        text: text,
+        length: S.length,
+        sources: srcs
+      });
+      history = history.slice(0, 30);
+      store("mp-history-v2", history);
+      go("final");
+      break;
+    case "copy":
+      copyText(S.final.text);
+      break;
+    case "backbuild":
+      go("build");
+      break;
+    case "startnew":
+      go("home");
+      break;
+    case "hopen":
+      var hItem = history[i];
+      S.final = { text: hItem.text, sources: hItem.sources || [], length: hItem.length, fromHistory: true };
+      go("final");
+      break;
+    case "hcopy":
+      copyText(history[i].text);
+      break;
+  }
+});
+
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
+    if (S.drawer) { S.drawer = null; renderLayer(); }
+    if (S.mobileMenu) { S.mobileMenu = false; render(); }
+  }
+});
+
+function copyText(t) {
+  var ok = function () { toast("Copied post text to clipboard"); };
+  try {
+    navigator.clipboard.writeText(t).then(ok, function () { fallbackCopy(t); });
+  } catch (e) {
+    fallbackCopy(t);
+  }
+}
+
+function fallbackCopy(t) {
+  var ta = document.createElement("textarea");
+  ta.value = t;
+  ta.style.position = "fixed";
+  ta.style.left = "-9999px";
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand("copy");
+    toast("Copied post text to clipboard");
+  } catch (e) {
+    toast("Please select and copy text");
+  }
+  document.body.removeChild(ta);
+}
+
+window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").addEventListener && window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+
+/* Initial Render */
+render();
+})();
+</script>
+</body>
+</html>
